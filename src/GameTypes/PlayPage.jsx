@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import HeaderComponent from '../Components/HeaderComponent';
 import { useNavigate } from 'react-router-dom';
-
+// import { useHistory } from 'react-router-dom';
 
 function PlayPage() {
     const navigate = useNavigate();
+    // const history = useHistory();
+
+    const navigateToComponent = (propValue) => {
+        navigate('/SecondPage', { state: { propKey: propValue } });
+    };
 
     return (
         <>
@@ -46,18 +51,14 @@ function PlayPage() {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-6 " style={{ cursor: 'pointer' }}>
-
-                                    <div className="card gamecard card-body" onClick={() => navigate('/FirstGame')}>
+                                    <div className="card gamecard card-body" onClick={() => navigateToComponent('quick')}>
                                         <img src="./images/gameimage.jpg" alt />
                                     </div>
-
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
-
-                                    <div className="card gamecard card-body" onClick={() => navigate('/SecondPage')}>
+                                    <div className="card gamecard card-body" onClick={() => navigateToComponent('rich')}>
                                         <img src="./images/gameimage.jpg" alt />
                                     </div>
-
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
 

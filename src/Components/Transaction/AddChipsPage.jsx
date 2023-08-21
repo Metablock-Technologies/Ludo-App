@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HeaderComponent from '../HeaderComponent';
 import { Navigate, useNavigate } from 'react-router-dom';
+import QRCodeDisplay from './Qrcode';
 
 function AddChipsPage() {
     const navigate = useNavigate();
+
     return (
         <>
             <section id="main-bg">
@@ -42,7 +44,7 @@ function AddChipsPage() {
                         <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="text-center">Buy Chips</div>
                             <div className="card-body walletbody mt-2">
-                                <div className="col-12 my-3">
+                                {/* <div className="col-12 my-3">
                                     <label htmlFor="username" className="text-left text-yellow">Enter Amount</label>
                                 </div>
                                 <div className="col-12 mb-4 d-flex justify-content-center">
@@ -53,7 +55,15 @@ function AddChipsPage() {
                                     <a href="#">
                                         <button className="bg-orange btn">Pay</button>
                                     </a>
-                                </div>
+                                </div> */}
+                                {/* Display QR code and pay text */}
+                                <QRCodeDisplay />
+
+                                {/* Screenshot upload */}
+                                {/* <ScreenshotUpload onUpload={handleScreenshotUpload} /> */}
+
+                                {/* API request */}
+                                {/* <ApiRequest amount={500} screenshot={uploadedScreenshot} /> */}
                             </div>
                         </div>
                         <div className="col-12 my-3">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import HeaderComponent from '../Components/HeaderComponent';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // import token from '../token';
 import { baseURL, token } from '../token';
 import axios from 'axios';
@@ -19,6 +19,10 @@ function SecondPage() {
     const navigate = useNavigate();
     const [debouncedInputValue, setDebouncedInputValue] = useState("");
 
+
+    const location = useLocation();
+    const propValue = location.state.propKey;
+    // console.log(propValue);
     // const handleSliderChange = (event) => {
     //     const newValue = parseInt(event.target.value);
     //     setSliderValue(newValue);
@@ -66,12 +70,12 @@ function SecondPage() {
             // console.log(response);
             const responsedata = response.data.data.rows;
             console.log("response", responsedata);
-            const filteredCreated = responsedata.filter(battle => battle.category === 'rich' && battle.status === 'created');
+            const filteredCreated = responsedata.filter(battle => battle.category === propValue && battle.status === 'created');
             // console.log(filteredCreated);
             setOpenBattles(filteredCreated)
             // console.log(responsedata);
 
-            const filteredRunning = responsedata.filter(battle => battle.category === 'rich' && battle.status === 'running');
+            const filteredRunning = responsedata.filter(battle => battle.category === propValue && battle.status === 'running');
             setRunningBattles(filteredRunning);
             // console.log(filteredRunning);
 
@@ -120,7 +124,7 @@ function SecondPage() {
                             <Runningbattles runningBattles={runningBattles} />
                         </div>
                         <div className="col-12 my-2 bg-purple2 py-3">
-                            <CreateBattles fetchData={fetchData} />
+                            <CreateBattles fetchData={fetchData} battletype={propValue} />
                         </div>
                     </div>
 

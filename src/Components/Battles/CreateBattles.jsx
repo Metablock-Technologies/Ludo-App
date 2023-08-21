@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { baseURL, token, token1 } from '../../token';
+import { baseURL } from '../../token';
 import axios from 'axios';
 
-function CreateBattles({ fetchData }) {
+function CreateBattles({ fetchData, battletype }) {
     const [createBattles, setCreateBattles] = useState([]);
     // const [messageError, setMessageError] = useState('');
 
@@ -15,7 +15,7 @@ function CreateBattles({ fetchData }) {
                 roundedAmount = roundedValue * 50;
             }
             const requestbody = {
-                category: "rich",
+                category: battletype,
                 price: roundedAmount
             }
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
@@ -64,7 +64,6 @@ function CreateBattles({ fetchData }) {
                         Create
                     </button>
                 </div>
-
             </div>
         </div>
     )
