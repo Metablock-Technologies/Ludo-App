@@ -20,7 +20,7 @@ const QRCodeDisplay = () => {
             {showQRCode ? (
                 <div>
                     {/* Display QR code */}
-                    <img src="../../../public/images/img.jpg" alt="QR Code" />
+                    <img src="./images/img.jpg" alt="QR Code" />
                     <p>Pay {amount} INR</p>
                     <p>Scan Qr code, take screenshot and upload the screenshot</p>
                     {showUpload && <ScreenshotUpload amount={amount} />}

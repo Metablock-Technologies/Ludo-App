@@ -14,35 +14,7 @@ function WalletPage() {
                     <div className="col-12">
                         <HeaderComponent />
                     </div>
-                    <div className="col-12">
-                        <div className="card container border border-danger mt-3 kycbox text-danger">
-                            <div className="row align-items-center my-2">
-                                <div className="d-flex my-auto col-6">
-                                    <h6>KYC Pending </h6><span className="material-symbols-outlined">error</span>
-                                </div>
-                                <div className="col-6 d-flex justify-content-end">
-                                    <a href="completekyc.html">
-                                        <button type="button" className="btn btn-danger float-right">Complete here</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div className="col-12" style={{ display: 'inline' }}>
-                        <div className="card container border border-success mt-2 kycbox text-success">
-                            <div className="row align-items-center my-2">
-                                <div className=" my-auto col-6">
-                                    <p className="mb-0">KYC status </p>
-                                    <div className="d-flex">
-                                        <h6><strong>Verified</strong></h6>
-                                        <span className="material-symbols-outlined">check_circle</span>
-                                    </div>
-                                </div>
-                                <div className="col-6 d-flex justify-content-end">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-success float-right">View Kyc Details</button>
-                                </div>
-                            </div>
-                        </div>
                         {/* Modal */}
                         <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog">

@@ -11,13 +11,10 @@ import CreateBattles from '../Components/Battles/CreateBattles';
 
 
 function SecondPage() {
-    // const [sliderValue, setSliderValue] = useState(50);
     const [inputAmount, setInputAmount] = useState(0)
-    // const [responsedata, setResponseData] = useState('')
     const [openBattles, setOpenBattles] = useState([])
     const [runningBattles, setRunningBattles] = useState([])
     const navigate = useNavigate();
-    const [debouncedInputValue, setDebouncedInputValue] = useState("");
 
 
     const location = useLocation();
