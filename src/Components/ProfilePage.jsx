@@ -1,9 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderComponent from './HeaderComponent';
+import { baseURL, token } from '../token';
+import axios from 'axios';
+
 // import "./bootstrap.css";
 // import "./style.css";
 
 function ProfilePage() {
+    const [gameplayed, setGamesplayed] = useState('');
+    const [chipswon, setChipsWon] = useState('');
+    const [referral, setReferral] = useState('');
+    const [penalty, setPenalty] = useState('');
+    const fetchdata = async () => {
+        try {
+            const accessToken = localStorage.getItem('access_token');
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const responsedetails = await axios.get(baseURL + '/user', {
+                headers: headers,
+            });
+
+            const response = await axios.get(baseURL + '/user/wallet', {
+                headers: headers,
+            });
+            console.log(response.data.data);
+            const responsedata = response.data.data;
+            // setGamesplayed(responsedata.)
+            setChipsWon(responsedata.won);
+            setPenalty(responsedata.penalty);
+            setReferral(responsedata.referral);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchdata();
+    }, [])
     return (
         <>
             <section id="main-bg">
@@ -130,7 +163,7 @@ function ProfilePage() {
                                             <div className="card profile-category text-white text-center px-0">
                                                 <p className="mt-2">Chips Won</p>
                                                 <div className="card-body profilecard text-center align-items-center justify-content-center">
-                                                    <h5 className>0.00</h5>
+                                                    <h5 className>{chipswon}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,7 +171,7 @@ function ProfilePage() {
                                             <div className="card profile-category text-white text-center px-0">
                                                 <p className="mt-2">Refferal Earning</p>
                                                 <div className="card-body profilecard text-center align-items-center justify-content-center">
-                                                    <h5 className>0.00</h5>
+                                                    <h5 className>{referral}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +179,7 @@ function ProfilePage() {
                                             <div className="card profile-category text-white text-center px-0">
                                                 <p className="mt-2">Penalty</p>
                                                 <div className="card-body profilecard text-center align-items-center justify-content-center">
-                                                    <h5 className>0.00</h5>
+                                                    <h5 className>{penalty}</h5>
                                                 </div>
                                             </div>
                                         </div>

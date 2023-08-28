@@ -16,7 +16,6 @@ function SecondPage() {
     const [runningBattles, setRunningBattles] = useState([])
     const navigate = useNavigate();
 
-
     const location = useLocation();
     const propValue = location.state.propKey;
     // console.log(propValue);
@@ -124,7 +123,6 @@ function SecondPage() {
                             <CreateBattles fetchData={fetchData} battletype={propValue} />
                         </div>
                     </div>
-
                 </div >
             </section >
 

@@ -1,15 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderComponent from '../Components/HeaderComponent';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useScrollTrigger } from '@mui/material';
+import { baseURL, } from '../token';
+import axios from 'axios';
 
 function EnterFirstGame() {
+    const [challengeruser, setChallengerUser] = useState('');
+    const [acceptoruser, setAcceptorUser] = useState('');
     const navigate = useNavigate();
+
+    // const navigate = useNavigate();
+    const location = useLocation();
+    const price = location.state.priceplay;
+    const roomcode = location.state.roomcode;
+    const challengerid = location.state.challengeruserid;
+
+    console.log(challengerid);
 
     const handleBackbtn = () => {
         navigate(-1)
         // console.log("heyy");
         // console.log(navigate);
     }
+    useEffect(() => {
+        fetch();
+    }, [])
+    const fetch = async () => {
+        try {
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            // console.log(accessToken);
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+            console.log(headers);
+            const response = await axios.get(`${baseURL}/user`, {
+                headers: headers
+            });
+            // console.log("acceptor", response.data.data.username);
+            setAcceptorUser(response.data.data.username);
+
+            const reseponsechallenger = await axios.get(`${baseURL}/user/${challengerid}`, {
+                headers: headers
+            });
+            // console.log("challenger", reseponsechallenger.data);
+            setChallengerUser(reseponsechallenger.data.data.username)
+        } catch (error) {
+            console.error("error:--", error);
+        }
+    }
+
     return (
         <>
             <section id="main-bg">
@@ -67,13 +105,13 @@ function EnterFirstGame() {
                                 </div>
                                 <div className="row">
                                     <div className="col-4">
-                                        <p className="text-light">Avni</p>
+                                        <p className="text-light">{acceptoruser}</p>
                                     </div>
                                     <div className="col-4 d-flex justify-content-center">
-                                        <p className="text-success text-end"><strong> Rs 50</strong></p>
+                                        <p className="text-success text-end"><strong> Rs {price}</strong></p>
                                     </div>
                                     <div className="col-4 d-flex justify-content-end">
-                                        <p className="text-light text-end">Avni</p>
+                                        <p className="text-light text-end">{challengeruser}</p>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +128,7 @@ function EnterFirstGame() {
                             <div className="text-center">Room Code</div>
                             <div className="card-body walletbody mt-2">
                                 <div className="col-12 py-2 ">
-                                    <h5 className="text-center text-purple"><strong><span>73435570</span></strong></h5>
+                                    <h5 className="text-center text-purple"><strong><span>{roomcode}</span></strong></h5>
                                 </div>
                                 <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
                                     <button className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center"><i className="bi bi-clipboard2-check" />Copy Code</button>

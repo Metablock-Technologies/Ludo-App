@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { baseURL, token } from '../../token';
 import axios from 'axios';
+import HeaderComponent from '../HeaderComponent';
 
 const Openbattles = ({ openBattles, fetchData }) => {
     const navigate = useNavigate();
+    const [messageError, setMessageError] = useState('');
 
-    const handleplaybtn = async (id) => {
+    const handleplaybtn = async (id, price, roomcode, challengeid) => {
+        setMessageError('');
         try {
             // navigate('/EnterFirstGame')
             console.log(id);
@@ -23,10 +26,33 @@ const Openbattles = ({ openBattles, fetchData }) => {
             fetchData();
             console.log(response);
             if (response) {
-                navigate('EnterFirstGame')
+                <HeaderComponent />
+                navigate('/EnterFirstGame', { state: { challengeruserid: challengeid, priceplay: price, roomcode: roomcode } });
             }
         } catch (error) {
-            console.error(error);
+            setMessageError(error.response.data.message);
+            console.error("error:--", error.response.data.message);
+        }
+    }
+    const handlecancelbtn = async (id) => {
+        setMessageError('');
+        try {
+            console.log(id);
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            // console.log(accessToken);
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+            console.log(headers);
+            const response = await axios.delete(`${baseURL}/challenge/${id}`, {
+                headers: headers
+            });
+            fetchData();
+            console.log(response);
+            // if (response) {
+            //     navigate('EnterFirstGame')
+            // }
+        } catch (error) {
+            setMessageError(error.response.data.message);
+            console.error("error:--", error);
         }
     }
 
@@ -41,7 +67,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
                 </div>
             </div>
             <div className='scroll-container'>
-
+                <p style={{ color: 'white' }}>{messageError}</p>
                 {openBattles.map((battle, index) => (
                     <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white" key={index}>
                         <div className="row">
@@ -63,7 +89,11 @@ const Openbattles = ({ openBattles, fetchData }) => {
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="btn bg-orange" onClick={() => handleplaybtn(battle.id)} >Play</button>
+                                        <button className="btn bg-orange" onClick={() => handleplaybtn(battle.id, battle.price, battle.roomcode, battle.challenger)} >Play</button>
+                                        {/* <button className="btn bg-orange" onClick={handlePlaybtn}>Play</button> */}
+                                    </div>
+                                    <div>
+                                        <button className="btn bg-orange" onClick={() => handlecancelbtn(battle.id)} >Cancel</button>
                                         {/* <button className="btn bg-orange" onClick={handlePlaybtn}>Play</button> */}
                                     </div>
                                 </div>

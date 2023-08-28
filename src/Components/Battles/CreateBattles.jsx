@@ -1,14 +1,32 @@
 import React, { useState } from 'react'
 import { baseURL } from '../../token';
 import axios from 'axios';
+import HeaderComponent from '../HeaderComponent';
 
 function CreateBattles({ fetchData, battletype }) {
     const [createBattles, setCreateBattles] = useState([]);
-    // const [messageError, setMessageError] = useState('');
+    const [messageError, setMessageError] = useState('');
 
     // console.log(createBattles);
     const handlecreate = async () => {
         try {
+            setMessageError('');
+            // if (battletype == 'quick') {
+            //     if (createBattles > 500) {
+            //         setMessageError("you cannot create battle more than 2000 in quick mode. Go to rich mode to play game more than 500.")
+            //     }
+            //     if (createBattles < 50) {
+            //         setMessageError("you cannot create battle less than 50 in quick mode. Go to rich mode to play game less than 50.")
+            //     }
+            // }
+            // if (battletype == 'rich') {
+            //     if (createBattles > 20000) {
+            //         setMessageError("you cannot create battle more than 20000 in rich mode.")
+            //     }
+            //     if (createBattles < 500) {
+            //         setMessageError("you cannot create battle less than 500 in rich mode. Go to quick mode to play game less than 500. ")
+            //     }
+            // }
             let roundedAmount = createBattles;
             if (roundedAmount % 50 != 0) {
                 const roundedValue = Math.round(createBattles / 50);
@@ -29,12 +47,15 @@ function CreateBattles({ fetchData, battletype }) {
             });
 
             if (response.data) {
-                fetchData()
+                < HeaderComponent />
+                fetchData();
             }
             // console.log(response);
 
         } catch (error) {
-            console.error(error);
+            setMessageError(error.response.data.message)
+            fetchData()
+            console.error("error", error);
         }
     };
 
@@ -59,7 +80,7 @@ function CreateBattles({ fetchData, battletype }) {
                             />
                         </div>
                     </div>
-                    {/* <p>{messageError}</p> */}
+                    <p>{messageError}</p>
                     <button className="bg-orange-create-battles-button btn " onClick={handlecreate}>
                         Create
                     </button>

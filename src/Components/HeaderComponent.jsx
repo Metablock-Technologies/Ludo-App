@@ -7,22 +7,22 @@ function HeaderComponent() {
     const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchdata = async (transactiontype) => {
-            try {
-                const accessToken = localStorage.getItem('access_token');
-                const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+    const fetchtransaction = async () => {
+        try {
+            const accessToken = localStorage.getItem('access_token');
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-                const response = await axios.get(baseURL + '/user/wallet', {
-                    headers: headers,
-                });
-                console.log(response.data);
-                setAmount(response.data.data.amount);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchdata();
+            const response = await axios.get(baseURL + '/user/wallet', {
+                headers: headers,
+            });
+            console.log(response.data);
+            setAmount(response.data.data.amount);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchtransaction();
     }, [])
 
     return (
