@@ -61,9 +61,16 @@ function CreateBattles({ fetchData, battletype }) {
 
     return (
         <div className="row">
-            <div className="col-12 mb-3 d-flex justify-content-be tween text-light">
+            <div className="col-12 mb-3 d-flex justify-content-between text-light">
                 <div className="d-flex">
-                    <h6 className="mb-0"><i className="bi bi-x-circle-fill text-danger" /> Create Battles</h6>
+                    <h6 className="mb-0">
+                        <i className="bi bi-x-circle-fill text-danger" /> Create Battles
+                    </h6>
+                    {battletype === "quick" ? (
+                        <p className="mb-0 ml-2">(50-500)</p>
+                    ) : (
+                        <p className="mb-0 ml-2">(500-20000)</p>
+                    )}
                 </div>
             </div>
 

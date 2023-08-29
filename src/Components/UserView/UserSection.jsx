@@ -70,7 +70,7 @@ function UserSection() {
                             </div>
                         </div>
 
-
+                        {/* 
                         <div onClick={() => navigate('/ReferandEarn')} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
                             <div className="d-flex align-items-center">
                                 <span className="material-symbols-outlined me-2">payments</span>
@@ -79,10 +79,10 @@ function UserSection() {
                             <div className="d-flex align-items-center">
                                 <span className="material-symbols-outlined">keyboard_arrow_right</span>
                             </div>
-                        </div>
+                        </div> */}
 
 
-                        <div onClick={() => { navigate('/SpinandWin') }} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
+                        {/* <div onClick={() => { navigate('/SpinandWin') }} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
                             <div className="d-flex align-items-center">
                                 <span className="material-symbols-outlined me-2">emoji_events</span>
                                 <h4 className="mb-0">Spin and Win</h4>
@@ -90,7 +90,7 @@ function UserSection() {
                             <div className="d-flex align-items-center">
                                 <span className="material-symbols-outlined">keyboard_arrow_right</span>
                             </div>
-                        </div>
+                        </div> */}
 
 
                         <div onClick={() => navigate('/LanguagesPage')} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">

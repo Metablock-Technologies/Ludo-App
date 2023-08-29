@@ -69,7 +69,7 @@ function ProfilePage() {
                                     <div className="col-12 my-1">
                                         <input type="number" className="col-12 text-left d-flex details" defaultValue={1234567890} disabled />
                                     </div>
-                                    <div className="col-12">
+                                    {/* <div className="col-12">
                                         <div className="row border rounded border-danger bg-transparent my-2">
                                             <div className="col-6 text-danger text-left d-flex my-auto">
                                                 KYC Pending <span className="material-symbols-outlined">error</span>
@@ -80,7 +80,7 @@ function ProfilePage() {
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="col-12" style={{ display: 'none' }}>
                                         <div className="card container border border-success mt-2 kycbox text-success">
                                             <div className="row align-items-center my-2">
@@ -167,14 +167,14 @@ function ProfilePage() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-6 p-1">
+                                        {/* <div className="col-6 p-1">
                                             <div className="card profile-category text-white text-center px-0">
                                                 <p className="mt-2">Refferal Earning</p>
                                                 <div className="card-body profilecard text-center align-items-center justify-content-center">
                                                     <h5 className>{referral}</h5>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-6 p-1">
                                             <div className="card profile-category text-white text-center px-0">
                                                 <p className="mt-2">Penalty</p>

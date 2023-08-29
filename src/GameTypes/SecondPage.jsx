@@ -15,7 +15,7 @@ function SecondPage() {
     const [openBattles, setOpenBattles] = useState([])
     const [runningBattles, setRunningBattles] = useState([])
     const navigate = useNavigate();
-
+    // const [sliderValue, setSliderValue] = useState(500)
     const location = useLocation();
     const propValue = location.state.propKey;
     // console.log(propValue);
@@ -114,13 +114,13 @@ function SecondPage() {
                             </div>
                         </div> */}
                         <div className="col-12 my-2 bg-purple2 py-3">
+                            <CreateBattles fetchData={fetchData} battletype={propValue} />
+                        </div>
+                        <div className="col-12 my-2 bg-purple2 py-3">
                             <Openbattles openBattles={openBattles} fetchData={fetchData} />
                         </div>
                         <div className="col-12 my-2 bg-purple2 py-3">
                             <Runningbattles runningBattles={runningBattles} />
-                        </div>
-                        <div className="col-12 my-2 bg-purple2 py-3">
-                            <CreateBattles fetchData={fetchData} battletype={propValue} />
                         </div>
                     </div>
                 </div >

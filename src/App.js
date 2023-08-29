@@ -4,8 +4,8 @@ import UserPage from './Components/UserView/UserPage';
 import WalletPage from './Components/Transaction/WalletPage';
 import HistoryPage from './Components/HistoryPage';
 import ProfilePage from './Components/ProfilePage';
-import ReferandEarn from './Components/ReferandEarn';
-import SpinadnWin from './Components/SpinadnWin';
+// import ReferandEarn from './Components/ReferandEarn';
+// import SpinadnWin from './Components/SpinadnWin';
 import LanguagesPage from './Components/LanguagesPage';
 import SupportPage from './Components/SupportPage';
 import LegalPage from './Components/LegalPage';
@@ -50,8 +50,8 @@ function App() {
                         <Route exact path='/WalletPage' element={<WalletPage />}></Route>
                         <Route exact path='/HistoryPage' element={<HistoryPage />}></Route>
                         <Route exact path='/ProfilePage' element={<ProfilePage />}></Route>
-                        <Route exact path='/ReferandEarn' element={<ReferandEarn />}></Route>
-                        <Route exact path='/SpinandWin' element={<SpinadnWin />}></Route>
+                        {/* <Route exact path='/ReferandEarn' element={<ReferandEarn />}></Route>
+                        <Route exact path='/SpinandWin' element={<SpinadnWin />}></Route> */}
                         <Route exact path='/LanguagesPage' element={<LanguagesPage />}></Route>
                         <Route exact path='/SupportPage' element={<SupportPage />}></Route>
                         <Route exact path='/LegalPage' element={<LegalPage />}></Route>
