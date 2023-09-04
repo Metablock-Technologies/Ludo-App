@@ -314,12 +314,12 @@ function RegisterPage() {
                                         </div>
                                         <div className="col-12 my-2">
                                             <p className="lh-lg text-center text-light">
-                                                By Continuing You agree to out<span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/LegalPage')}> Legal Terms</span> and you are 18 years of older.
+                                                By Continuing You agree to out<span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterLegalPAge')}> Legal Terms</span> and you are 18 years of older.
                                             </p>
                                         </div>
                                         <div className="col-12 my-2">
                                             <p className="lh-lg text-center text-light">
-                                                Already have an account?  <span style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => navigate('/LoginPage')}> Login</span>.
+                                                Already have an account?  <span style={{ color: '#ffb900', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => navigate('/LoginPage')}> Login</span>.
                                             </p>
                                         </div>
                                     </div>
@@ -327,6 +327,16 @@ function RegisterPage() {
                             </div>
                         </div>
                     </>
+                </div>
+                <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+                    <div className="rcBanner flex-center">
+                        <picture className="rcBanner-img-containerr">
+                            <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
+                        </picture>
+                        <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                    </div>
+
                 </div>
             </section>
         </>

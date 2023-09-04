@@ -98,7 +98,7 @@ function LoginPage() {
                                     {passwordError && <p style={{ color: 'red' }} className="error-message">{passwordError}</p>}
                                     <div className="col-12 my-2">
                                         <p className="lh-md text-center text-light">
-                                            By Continuing You agree to out <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/LegalPage')}> Legal Terms</span> and you are 18 years of older.
+                                            By Continuing You agree to out <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterLegalPage')}> Legal Terms</span> and you are 18 years of older.
                                         </p>
                                     </div>
                                     <div className="col-12 my-2">
@@ -108,18 +108,28 @@ function LoginPage() {
                                     </div>
                                     <div className="col-12 my-2">
                                         <p className="lh-lg text-center text-light">
-                                            Don’t have an account? <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterPage')}> Register</span> .
+                                            Don’t have an account? <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterPage')}> Register</span> .
                                         </p>
                                     </div>
                                     {/* to be removed row in final project */}
                                     <div className="col-12">
-                                        <p className="text-light text-center">go to the <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}>Home Page</span><br />(this row will be removed in final project)</p>
+                                        <p className="text-light text-center">go to the <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}>Home Page</span><br />(this row will be removed in final project)</p>
                                     </div>
                                     {/* to be removed row in final project */}
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="" style={{  position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+                    <div className="rcBanner flex-center">
+                        <picture className="rcBanner-img-containerr">
+                            <img style={{ marginLeft:'10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg"alt />
+                        </picture>
+                        <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                    </div>
+
                 </div>
             </section>
 

@@ -66,12 +66,16 @@ function CreateBattles({ fetchData, battletype }) {
                     <h6 className="mb-0">
                         <i className="bi bi-x-circle-fill text-danger" /> Create Battles
                     </h6>
-                    {battletype === "quick" ? (
-                        <p className="mb-0 ml-2">(50-500)</p>
-                    ) : (
-                        <p className="mb-0 ml-2">(500-20000)</p>
-                    )}
                 </div>
+                <div className='d-flex' >
+                    {battletype === "quick" ? (
+                        <p className="mb-0 ml-2 mr-auto  "> <strong>(50-500)</strong></p>
+                    ) : (
+                            <p className="mb-0 ml-2 mr-auto"><strong>(500-20000)</strong></p>
+                    )}
+
+                </div>
+
             </div>
 
             <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white" >
@@ -83,7 +87,7 @@ function CreateBattles({ fetchData, battletype }) {
                             <input className='create-battles-input'
                                 type="text"
                                 onChange={(e) => setCreateBattles(e.target.value)}
-                                placeholder='enter amount'
+                                placeholder='Enter Amount'
                             />
                         </div>
                     </div>

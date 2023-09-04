@@ -33,7 +33,7 @@ function HeaderComponent() {
                     <h4 className="mb-0"><i onClick={() => navigate('/UserPage')} className="bi bi-list" style={{ color: 'white', cursor: 'pointer' }} /></h4>
                 </div>
                 <div className="col-3">
-                    <span style={{ cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}><img src="./images/logo.png" alt /></span>
+                    <span style={{ cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}><img style={{ width: '40px', borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt /></span>
                 </div>
                 <div className="col-8 d-flex justify-content-end">
 

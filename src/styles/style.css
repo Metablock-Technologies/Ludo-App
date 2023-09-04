@@ -16,17 +16,19 @@
 
 #main-bg {
     background-image: url('/public/images/Desktop.png');
-    height: 100vh !important;
+    height: 100% !important;
     background-size: 100% !important;
 }
 
 /* index page */
 
 #index-container {
-    max-width: 550px !important;
-    height: 100vh !important;
+   width: 100%;
+   padding-top:-20px !important ;
+   padding-bottom: -20px !important;
+    height: 100% !important;
     background-color: black  !important;
-    overflow-y: auto !important;
+    overflow-y: hidden !important;
 }
 
 #index-nav {
@@ -34,11 +36,13 @@
 }
 
 #image-dice {
-    width: 47% !important;
+    height: auto !important;
+    max-width: 47% !important;
 }
 
 #image-winner {
-    width: 30% !important;
+    height: auto !important;
+    max-width: 30% !important;
 }
 
 #play-tag {
@@ -596,3 +600,48 @@ background-image: url('/public/images/register-bg.png');
   .scroll-container::-webkit-scrollbar {
     width: 0; /* Hide scrollbar on Chrome and Safari */
   }
+  .flex-center {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}   
+.rcBanner {
+    height: 100%;
+    left: 0;
+    min-width: 320px;
+    position: absolute;
+    width: 100%;
+}
+@media screen and (max-width:1020px) {
+    .rcBanner{
+        display: none;
+    }
+}
+/* .rcBanner-img-container {
+    bottom: 45% !important;
+    position: absolute !important;
+    width: 200px !important;
+} */
+.rcBanner-text {
+        bottom: -175px;
+    color: white;
+    font-family: Poppins,sans-serif;
+    font-size: 1.2em;
+    font-weight: 400;
+    position: absolute;
+    text-transform: uppercase;
+}
+.rcBanner-text-bold {
+    font-weight: 900 !important;
+}
+.rcBanner-footer {
+       bottom: -342px !important;
+    color: #2c2c2c !important;
+    font-size: 1.5em !important ;
+    font-weight: 400 !important;
+    line-height: 32px;
+    color: white !important;
+    position: absolute;
+    text-align: center;
+}

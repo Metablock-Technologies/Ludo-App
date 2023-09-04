@@ -13,16 +13,12 @@ function SupportPage() {
       </div>
       <div className="col-12">
         <div className="card container border border-danger mt-3 kycbox text-danger">
-          <div className="row align-items-center my-2">
-            <div className="d-flex my-auto col-6">
-              <h6>KYC Pending </h6><span className="material-symbols-outlined">error</span>
+         
+            <div style={{width:'100%'}} className=" my-auto col-6">
+                    <h6 style={{lineHeight:'1.6'}}>KYC Pending Do not share OTP with anyone. Our team does not request OTP for any task. If you provide OTP to anyone, you yourself will be held responsible 🙏 </h6>
             </div>
-            <div className="col-6 d-flex justify-content-end">
-              <a href="completekyc.html">
-                <button type="button" className="btn btn-danger float-right">Complete here</button>
-              </a>
-            </div>
-          </div>
+            
+          
         </div>
       </div>
       {/* <div className="col-12" style={{display: 'none'}}>
@@ -56,6 +52,16 @@ function SupportPage() {
       <button id="guide-btn" className="btn btn-outline-primary bg-light my-auto"><i className="fa fa-envelope" /> Reach Us Via Email</button>
     </a>
   </div>
+        <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+          <div className="rcBanner flex-center">
+            <picture className="rcBanner-img-containerr">
+              <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
+            </picture>
+            <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+            <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+          </div>
+
+        </div>
 </section>
 
    </>

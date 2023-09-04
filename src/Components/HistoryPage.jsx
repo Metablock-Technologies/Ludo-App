@@ -126,6 +126,16 @@ function HistoryPage() {
                         </div>
                     </div>
                 </div>
+                <div className="rightContainer" style={{ position: 'fixed', top: 0, bottom: 0, left: 900, zIndex: 5 }}>
+                    <div className="rcBanner flex-center">
+                        <picture className="rcBanner-img-container">
+                            <img style={{ width: "100% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
+                        </picture>
+                        <div className="rcBanner-text">Play Ludo  <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+                        <div className="rcBanner-footer">For best experience  , open&nbsp;<span style={{ cursor: "pointer", color: '#ffb900' }}>LudoPlayers.com</span>
+                            &nbsp;on&nbsp;&nbsp;chrome </div>
+                    </div>
+                </div>
             </section>
         </>
     );
