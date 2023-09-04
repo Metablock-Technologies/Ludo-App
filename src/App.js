@@ -23,9 +23,6 @@ import SignUpPage from './Components/Authentication/SignUpPage';
 
 export const AuthContext = createContext()
 function App() {
-
-
-
     const [user, setUser] = useState({
         name: '',
         memberType: '',
@@ -34,7 +31,6 @@ function App() {
     return (
         <>
             <AuthContext.Provider value={{ user, setUser }}>
-
                 <BrowserRouter>
                     <Routes>
                         <Route exact path='/' element={<MainPage />}></Route>
@@ -57,7 +53,6 @@ function App() {
                         <Route exact path='/LegalPage' element={<LegalPage />}></Route>
                         <Route exact path='/AddChipsPage' element={<AddChipsPage />}></Route>
                         <Route exact path='/WithDrawPage' element={<WithDrawPage />}></Route>
-
                     </Routes>
                 </BrowserRouter>
             </AuthContext.Provider>
