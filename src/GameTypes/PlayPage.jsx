@@ -17,11 +17,20 @@ function PlayPage() {
                 <div id="home-container" className="container mx-0">
                     <div className="row mb-5">
                         <div className="col-12 bg-orange text-center m-0">
-                            Commission: 5% ◉ Referral: 2% For All Games
+                            Commission: 5% ◉ For All Games
                         </div>
                         <div className="col-12">
                             <HeaderComponent />
+                            <div className="col-12">
+                                <div className="card container border border-danger mt-3 kycbox text-danger">
 
+                                    <div style={{ width: '100%' }} className=" my-auto col-6">
+                                        <h6 style={{ lineHeight: '1.6' }}>KYC Pending Do not share OTP with anyone. Our team does not request OTP for any task. If you provide OTP to anyone, you yourself will be held responsible 🙏 </h6>
+                                    </div>
+
+
+                                </div>
+                            </div>
 
                         </div>
                         <div className="col-12">
@@ -52,28 +61,36 @@ function PlayPage() {
                             <div className="row">
                                 <div className="col-6 " style={{ cursor: 'pointer' }}>
                                     <div className="card gamecard card-body" onClick={() => navigateToComponent('quick')}>
-                                        <img src="./images/gameimage.jpg" alt />
+                                        <img src="./images/WhatsApp35.jpg" alt />
                                     </div>
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
                                     <div className="card gamecard card-body" onClick={() => navigateToComponent('rich')}>
-                                        <img src="./images/gameimage.jpg" alt />
+                                        <img src="./images/WhatsApp.44.jpg" alt />
                                     </div>
+                                </div>
+                                <div className="col-6" style={{ opacity: '50%', cursor: "not-allowed" }}>
+
+                                    <div className="card gamecard card-body" >
+                                        <img src="./images/WhatsApp18.jpg" alt />
+                                    </div>
+
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
 
-                                    <div className="card gamecard card-body" onClick={() => { navigate('/FirstGame') }}>
-                                        <img src="./images/gameimage.jpg" alt />
+                                    <div style={{ background: 'black', opacity: '50%', cursor: "not-allowed" }} className="card gamecard card-body" >
+                                        <img src="./images/WhatsApp3.jpg" alt />
                                     </div>
 
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
 
-                                    <div className="card gamecard card-body" onClick={() => navigate('/SecondPage')}>
-                                        <img src="./images/gameimage.jpg" alt />
+                                    <div style={{ background: 'black', opacity: '50%', cursor: "not-allowed" }} className="card gamecard card-body" >
+                                        <img src="./images/WhatsApp2.jpg" alt />
                                     </div>
 
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -85,6 +102,17 @@ function PlayPage() {
                         </div>
                     </div>
                 </div>
+                <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+                    <div className="rcBanner flex-center">
+                        <picture className="rcBanner-img-containerr">
+                            <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
+                        </picture>
+                        <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                    </div>
+
+                </div>
+
             </section>
 
         </>

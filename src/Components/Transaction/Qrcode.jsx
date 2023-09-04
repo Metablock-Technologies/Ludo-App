@@ -20,7 +20,10 @@ const QRCodeDisplay = () => {
             {showQRCode ? (
                 <div>
                     {/* Display QR code */}
-                    <img src="./images/img.jpg" alt="QR Code" />
+
+                    <div style={{placeItems:'center ' ,marginLeft:'1rem'}}>  <img style={{ width: '300px' }} src="./images/metaBlock.png" alt="QR Code" /></div>
+
+                   
                     <p>Pay {amount} INR</p>
                     <p>Scan Qr code, take screenshot and upload the screenshot</p>
                     {showUpload && <ScreenshotUpload amount={amount} />}
@@ -36,7 +39,7 @@ const QRCodeDisplay = () => {
                     </div>
                     <div className="col-12">
                         <a href="#">
-                            <button className="bg-orange btn" onClick={handlePayClick}>Pay</button>
+                            <button className="bg-orange btn"  onClick={handlePayClick}>Pay</button>
                         </a>
                     </div>
                 </>

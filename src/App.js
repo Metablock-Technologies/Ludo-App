@@ -20,6 +20,7 @@ import SecondPage from './GameTypes/SecondPage';
 import EnterFirstGame from './GameTypes/EnterFirstGame';
 import OTPPage from './Components/Authentication/OTPPage';
 import SignUpPage from './Components/Authentication/SignUpPage';
+import RegisterLegalPAge from './Components/RegisterLegalPAge';
 
 export const AuthContext = createContext()
 function App() {
@@ -39,6 +40,7 @@ function App() {
                     <Routes>
                         <Route exact path='/' element={<MainPage />}></Route>
                         <Route exact path='/RegisterPage' element={<RegisterPage />}></Route>
+                        <Route exact path="/RegisterLegalPAge" element={<RegisterLegalPAge />}></Route>
                         <Route exact path='/LoginPage' element={<LoginPage />}></Route>
                         <Route exact path='/OTPPage' element={<OTPPage />} />
                         <Route exact path='/UserPage' element={<UserPage />}></Route>
