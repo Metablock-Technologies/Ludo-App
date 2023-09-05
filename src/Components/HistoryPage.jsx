@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import HeaderComponent from './HeaderComponent';
 import { baseURL, token } from '../token';
 import axios from 'axios';
-import Logo from '../styles/logo.jpg'
+// import Logo from '../styles/logo.jpg'
+import Logo from './Logo';
 
 function HistoryPage() {
     const [selectedType, setSelectedType] = useState('classic');

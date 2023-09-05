@@ -118,11 +118,6 @@ function LoginPage() {
                                             Don’t have an account? <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterPage')}> Register</span> .
                                         </p>
                                     </div>
-                                    {/* to be removed row in final project */}
-                                    <div className="col-12">
-                                        <p className="text-light text-center">go to the <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}>Home Page</span><br />(this row will be removed in final project)</p>
-                                    </div>
-                                    {/* to be removed row in final project */}
                                 </div>
                             </div>
                         </div>
