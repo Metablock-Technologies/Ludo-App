@@ -1,16 +1,16 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { baseURL } from './RegisterPage';
+// import { baseURL } from './RegisterPage';
 import { AuthContext } from '../../App';
-
+import { baseURL } from '../../token';
 
 
 function SignUpPage() {
     const [username, setUserName] = useState();
     const [referCode, setreferCode] = useState();
     const [password, setPassword] = useState();
-
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
     // access token : = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjQyLCJyb2xlIjoiYmFzaWMiLCJpYXQiOjE2OTI1MzI3NjksImV4cCI6MTY5NTEyNDc2OX0.nZk-UknVgBpPpgWvqfIIBsIma_fRNCYoXsApIPbdbsk"
     const location = useLocation();
@@ -24,7 +24,7 @@ function SignUpPage() {
     const { user, setUser } = useContext(AuthContext)
 
     const handleSignUpClick = async () => {
-
+        setMessage('');
         console.log(localStorage.getItem('access_token'));
         const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
@@ -33,8 +33,6 @@ function SignUpPage() {
             name: name,
             username: username,
             password: password,
-
-
         }
         try {
             const response = await axios.post(baseURL + '/user/', body, {
@@ -53,6 +51,7 @@ function SignUpPage() {
             }
         } catch (err) {
             console.error(err);
+            setMessage(err?.response?.data?.message);
         }
     }
     return (
@@ -83,6 +82,7 @@ function SignUpPage() {
                                 <div className="col-12 my-2">
                                     <input type="text" placeholder="Refer code (optional)" defaultValue={referCode} onChange={(e) => setreferCode(e.target.value)} />
                                 </div>
+                                <p style={{ color: 'red' }}>{message}</p>
                                 <div className="col-12 my-2">
                                     <button className="bg-orange btn" onClick={handleSignUpClick} >Sign Up</button>
                                 </div>

@@ -6,11 +6,12 @@ import HeaderComponent from '../HeaderComponent';
 function CreateBattles({ fetchData, battletype }) {
     const [createBattles, setCreateBattles] = useState([]);
     const [messageError, setMessageError] = useState('');
+    const [roomcode, setRoomcode] = useState('');
 
     // console.log(createBattles);
     const handlecreate = async () => {
+        setMessageError('');
         try {
-            setMessageError('');
             // if (battletype == 'quick') {
             //     if (createBattles > 500) {
             //         setMessageError("you cannot create battle more than 2000 in quick mode. Go to rich mode to play game more than 500.")
@@ -51,9 +52,8 @@ function CreateBattles({ fetchData, battletype }) {
                 fetchData();
             }
             // console.log(response);
-
         } catch (error) {
-            setMessageError(error.response.data.message)
+            setMessageError(error?.response?.data?.message)
             fetchData()
             console.error("error", error);
         }
@@ -71,7 +71,7 @@ function CreateBattles({ fetchData, battletype }) {
                     {battletype === "quick" ? (
                         <p className="mb-0 ml-2 mr-auto  "> <strong>(50-500)</strong></p>
                     ) : (
-                            <p className="mb-0 ml-2 mr-auto"><strong>(500-20000)</strong></p>
+                        <p className="mb-0 ml-2 mr-auto"><strong>(500-20000)</strong></p>
                     )}
 
                 </div>
@@ -88,6 +88,13 @@ function CreateBattles({ fetchData, battletype }) {
                                 type="text"
                                 onChange={(e) => setCreateBattles(e.target.value)}
                                 placeholder='Enter Amount'
+                            />
+                        </div>
+                        <div className="col-12 my-2">
+                            <input className='create-battles-input'
+                                type="text"
+                                onChange={(e) => setRoomcode(e.target.value)}
+                                placeholder='Enter Your Room code'
                             />
                         </div>
                     </div>

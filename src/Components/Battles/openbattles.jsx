@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { baseURL, token } from '../../token';
 import axios from 'axios';
 import HeaderComponent from '../HeaderComponent';
+// import Logo from '../styles/logo.jpg'
 
 const Openbattles = ({ openBattles, fetchData }) => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
             console.log(response);
             if (response) {
                 <HeaderComponent />
-                navigate('/EnterFirstGame', { state: { challengeruserid: challengeid, priceplay: price, roomcode: roomcode } });
+                navigate('/EnterFirstGame', { state: { challengeruserid: challengeid, priceplay: price, roomcode: roomcode, type: "openbattle" } });
             }
         } catch (error) {
             setMessageError(error.response.data.message);
@@ -71,8 +72,9 @@ const Openbattles = ({ openBattles, fetchData }) => {
                 {openBattles.map((battle, index) => (
                     <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white" key={index}>
                         <div className="row">
-                            <div className="col">
-                                <h6 className="mx-2">CHALLENGE FROM <span className="text-danger">{battle.ChallengerUser.username}</span></h6>
+                            <div className="col d-flex justify-content-between " >
+                                <h6 className="mx-2">CHALLENGE FROM <span style={{ textTransform: "capitalize" }} className="text-danger">{battle.ChallengerUser.username}</span></h6>
+                                <h6 className="mx-2">1234</h6>
                             </div>
                         </div>
                         <div className="card-body walletbody mt-2">

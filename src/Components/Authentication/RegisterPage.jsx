@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SignUpPage from './SignUpPage';
-export const baseURL = "https://misty-pelican.cyclic.cloud/api/v1"
-
+// export const baseURL = "https://misty-pelican.cyclic.cloud/api/v1"
+import { baseURL } from '../../token';
 function RegisterPage() {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -20,12 +20,13 @@ function RegisterPage() {
     const [isEmailVerified, setIsEmailVerified] = useState(false);
     const [showEmailField, setShowEmailField] = useState(false);
     const [isGetOtpDisabled, setIsGetOtpDisabled] = useState(true); // Add state for Get OTP button
-
+    const [message, setMessage] = useState('');
 
     const navigate = useNavigate();
 
 
     const handleGetOtpClick = async () => {
+        setMessage('');
         if (!name.trim()) {
             setNameError('Please enter your name');
             return;
@@ -70,10 +71,12 @@ function RegisterPage() {
             }
         } catch (err) {
             console.log(err);
+            setMessage(err?.response?.data?.message);
         }
     };
 
     const handleVerifyNumberClick = async () => {
+        setMessage('');
         try {
             const queryParams = {
                 mode: isPhoneNumberVerified ? 'email' : "phone",
@@ -110,6 +113,7 @@ function RegisterPage() {
         catch (err) {
             console.log(err);
             // Enable the Get OTP button
+            setMessage(err?.response?.data?.message);
         }
 
         // Add your logic for verifying the number here
@@ -169,9 +173,8 @@ function RegisterPage() {
         const updatedValues = [...otpInputs];
         updatedValues[index] = value;
         setOtpInputs(updatedValues);
+        setMessage('')
     };
-
-
 
     return (
         <>
@@ -288,7 +291,7 @@ function RegisterPage() {
 
                                         ) : null}
 
-
+                                        <p style={{ color: 'red' }}>{message}</p>
                                         <div className="col-12 my-2">
                                             {isVerifying ? (
                                                 <>
@@ -297,9 +300,7 @@ function RegisterPage() {
                                                     }}>
                                                         {isEmailVerified ? "Verify Email" : "Verify Number"}
                                                     </button>
-
                                                 </>
-
                                             ) : (
                                                 <>
                                                     <button

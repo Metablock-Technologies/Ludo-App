@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import HeaderComponent from './HeaderComponent';
+import Logo from '../styles/logo.jpg'
 
 function RegisterLegalPAge() {
     const [activeCard, setActiveCard] = useState(null);
@@ -17,7 +18,7 @@ function RegisterLegalPAge() {
                 <div id="legalterms-container" className="container mx-0">
                     <div className="row">
                         <div className="col-12 mb-5">
-                            <HeaderComponent/>
+                            <HeaderComponent />
 
                         </div>
                         <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white">
@@ -134,16 +135,17 @@ function RegisterLegalPAge() {
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
-                        <picture className="rcBanner-img-containerr">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>

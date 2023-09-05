@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import HeaderComponent from './HeaderComponent';
 import { baseURL, token } from '../token';
 import axios from 'axios';
+import Logo from './Logo';
+import { useNavigate } from 'react-router-dom';
 
 // import "./bootstrap.css";
 // import "./style.css";
@@ -11,14 +13,36 @@ function ProfilePage() {
     const [chipswon, setChipsWon] = useState('');
     const [referral, setReferral] = useState('');
     const [penalty, setPenalty] = useState('');
+    const [responsedetails, setResponsedetails] = useState({
+        name: '',
+        phone: ''
+    });
+    const [name, setName] = useState('');
+
+    const [enable, setEnable] = useState(true);
+    const navigate = useNavigate();
+
     const fetchdata = async () => {
         try {
             const accessToken = localStorage.getItem('access_token');
             const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-            const responsedetails = await axios.get(baseURL + '/user', {
+            const responsedetail = await axios.get(baseURL + '/user', {
                 headers: headers,
             });
+
+            const responseData = responsedetail.data.data;
+
+            // Update the state with the name and phone
+            setResponsedetails({
+                name: responseData.name,
+                phone: responseData.phone
+            });
+
+            console.log("response", responsedetail);
+            setName(responseData.name);
+            console.log("name:", responseData.name);
+            console.log("Phone:", responseData.phone);
 
             const response = await axios.get(baseURL + '/user/wallet', {
                 headers: headers,
@@ -37,6 +61,39 @@ function ProfilePage() {
     useEffect(() => {
         fetchdata();
     }, [])
+    const handleEdit = async () => {
+        setEnable(false)
+        // fetchdata();
+    }
+    const handleCancel = async () => {
+        setEnable(true);
+        fetchdata();
+    }
+    const handleSave = async () => {
+        try {
+            const reqbody = {
+                name: name
+            }
+            const accessToken = localStorage.getItem('access_token');
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const responsedetail = await axios.put(baseURL + '/user/profile', reqbody, {
+                headers: headers,
+            });
+            console.log(responsedetail)
+            if (responsedetail) {
+                fetchdata();
+                setEnable(true);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleLogout = async () => {
+        // logout();
+        localStorage.removeItem('access_token');
+        navigate('/LoginPage')
+    }
     return (
         <>
             <section id="main-bg">
@@ -55,32 +112,32 @@ function ProfilePage() {
                                         </div>
                                     </div>
                                     <div className="col-12 my-2">
-                                        <label htmlFor="username" className="text-left text-yellow">Username</label>
+                                        <label htmlFor="name" className="text-left text-yellow">Name</label>
                                     </div>
                                     <div className="col-12 d-flex">
-                                        <input type="text" className="col-9 text-left d-flex details-1" defaultValue="Username" disabled />
+                                        <input style={{ textTransform: "capitalize" }} type="text" className="col-9 text-left d-flex details-1 " defaultValue="name" value={name}
+                                            onChange={(e) => { setName(e.target.value) }}
+                                            disabled={enable} />
                                         <a href="#" className="col-3 mx-1 d-flex justify-content-end text-decoration-none">
-                                            <button className="bg-orange btn">Edit</button>
+                                            {enable ?
+                                                (<button className="bg-orange btn" onClick={handleEdit}>Edit</button>) :
+                                                (<>
+                                                    <div className='d-flex justify-content-center gap-2' style={{}}>
+
+                                                        <button className="bg-orange btn " onClick={handleCancel}>Cancel</button>
+                                                        <button className="bg-orange btn" onClick={handleSave}>Save</button>
+                                                    </div>
+                                                </>
+                                                )}
                                         </a>
                                     </div>
                                     <div className="col-12 my-2">
                                         <label htmlFor="mobile number" className="text-left text-yellow">Mobile Number</label>
                                     </div>
                                     <div className="col-12 my-1">
-                                        <input type="number" className="col-12 text-left d-flex details" defaultValue={1234567890} disabled />
+                                        <input type="number" className="col-12 text-left d-flex details" value={responsedetails?.phone} disabled />
                                     </div>
-                                    {/* <div className="col-12">
-                                        <div className="row border rounded border-danger bg-transparent my-2">
-                                            <div className="col-6 text-danger text-left d-flex my-auto">
-                                                KYC Pending <span className="material-symbols-outlined">error</span>
-                                            </div>
-                                            <div className="col-6 d-flex justify-content-end">
-                                                <a href="completekyc.html" className="  text-decoration-none my-auto">
-                                                    <button className="btn btn-danger my-2">Complete Here</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div> */}
+
                                     <div className="col-12" style={{ display: 'none' }}>
                                         <div className="card container border border-success mt-2 kycbox text-success">
                                             <div className="row align-items-center my-2">
@@ -187,20 +244,20 @@ function ProfilePage() {
                                 </div>
                             </div>
                         </div>
-                        <a href="#" className="text-center my-2 row mt-2 mx-auto text-decoration-none">
+                        <a href="#" className="text-center my-2 row mt-2 mx-auto text-decoration-none" onClick={handleLogout}>
                             <button className="col-12 btn rounded btn-danger px-2">Logout</button>
                         </a>
                     </div>
                 </div>
                 <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
-                        <picture className="rcBanner-img-containerr">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
-
                 </div>
             </section>
 

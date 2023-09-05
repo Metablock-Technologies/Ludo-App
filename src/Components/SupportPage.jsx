@@ -1,17 +1,18 @@
 import React from 'react'
 import HeaderComponent from './HeaderComponent';
+import Logo from '../styles/logo.jpg'
 
 function SupportPage() {
-  return (
-   <>
-         <section id="main-bg">
-  <div id="support-container" className="container mx-0">
-    <div className="row">
-      <div className="col-12">
-        <HeaderComponent/>
-         
-      </div>
-      <div className="col-12">
+    return (
+        <>
+            <section id="main-bg">
+                <div id="support-container" className="container mx-0">
+                    <div className="row">
+                        <div className="col-12">
+                            <HeaderComponent />
+
+                        </div>
+                        {/* <div className="col-12">
         <div className="card container border border-danger mt-3 kycbox text-danger">
          
             <div style={{width:'100%'}} className=" my-auto col-6">
@@ -20,8 +21,8 @@ function SupportPage() {
             
           
         </div>
-      </div>
-      {/* <div className="col-12" style={{display: 'none'}}>
+      </div> */}
+                        {/* <div className="col-12" style={{display: 'none'}}>
         <div className="card container border border-success mt-2 kycbox text-success">
           <div className="row align-items-center my-2">
             <div className=" my-auto col-6">
@@ -38,34 +39,35 @@ function SupportPage() {
         </div>
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div> */}
-      <div className="col-12 object-fit-contain text-center">
-        <img id="support-img" src="./images/Support.png" alt />
-      </div>
-    </div>
-    <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
-      <button className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center"><span className="material-symbols-outlined">chat</span>Live Chat</button>
-    </a>
-    <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
-      <button className="col-12 btn rounded my-auto instabtn"><strong className="text-light"> <i className="fa fa-instagram" /> Connect On Instagram</strong></button>
-    </a>
-    <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
-      <button id="guide-btn" className="btn btn-outline-primary bg-light my-auto"><i className="fa fa-envelope" /> Reach Us Via Email</button>
-    </a>
-  </div>
-        <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
-          <div className="rcBanner flex-center">
-            <picture className="rcBanner-img-containerr">
-              <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
-            </picture>
-            <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-            <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
-          </div>
+                        <div className="col-12 object-fit-contain text-center">
+                            <img id="support-img" src="./images/Support.png" alt />
+                        </div>
+                    </div>
+                    <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
+                        <button className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center"><span className="material-symbols-outlined">chat</span>Live Chat</button>
+                    </a>
+                    <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
+                        <button className="col-12 btn rounded my-auto instabtn"><strong className="text-light"> <i className="fa fa-instagram" /> Connect On Instagram</strong></button>
+                    </a>
+                    <a href="#" className="text-center row my-2 mx-auto text-decoration-none">
+                        <button id="guide-btn" className="btn btn-outline-primary bg-light my-auto"><i className="fa fa-envelope" /> Reach Us Via Email</button>
+                    </a>
+                </div>
+                <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+                    <div className="rcBanner flex-center">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
+                            <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
+                        </picture>
+                        <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
+                    </div>
 
-        </div>
-</section>
+                </div>
+            </section>
 
-   </>
-  )
+        </>
+    )
 }
 
 export default SupportPage;

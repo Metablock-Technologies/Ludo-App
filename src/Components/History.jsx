@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderComponent from './HeaderComponent';
 import { baseURL, token } from '../token';
 import axios from 'axios';
+import Logo from '../styles/logo.jpg'
 
 function HistoryPage() {
     const [selectedType, setSelectedType] = useState('classic');
@@ -76,13 +77,13 @@ function HistoryPage() {
                         <div className="col-12">
                             {selectedTransactionData.map(item => (
                                 <div key={item.id} className="row bg-light p-1 mb-2">
-                                    <div className="col-3 border-end">
+                                    <div className="col-3 border-end d-flex" >
                                         <img src='./images/img.jpg' className="rounded-circle" style={{ width: '20%' }} alt="" />
-                                        <h6 className="mb-0"><strong>{item.Sender.username}</strong></h6>
+                                        <span className="mb-0"><strong>{item.Sender.username}</strong></span>
                                     </div>
                                     <div className="col-9">
                                         <div className="row">
-                                            <div className="col-12 d-flex justify-content-between">
+                                            <div className="col-12 d-flex justify-content-between ">
                                                 <h6 className="mb-0"><strong>{item.message}</strong></h6>
                                                 <h6 className="mb-0"><strong>{item.Receiver.username}</strong></h6>
                                                 <h6 className={`mb-0 text-end ${item.amount < 0 ? 'text-danger' : 'text-success'}`}>
@@ -128,11 +129,12 @@ function HistoryPage() {
                 </div>
                 <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
-                        <picture className="rcBanner-img-containerr">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>

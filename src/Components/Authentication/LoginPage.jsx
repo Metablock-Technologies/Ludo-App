@@ -3,19 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios';
-import { baseURL } from './RegisterPage';
+import { baseURL } from '../../token';
+import Logo from '../Logo';
+
 function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [message, setMessage] = useState('');
 
 
     const handleValidation = () => {
         // Reset previous error messages
         setEmailError('');
         setPasswordError('');
+        setMessage('')
 
         // Perform validation
         let isValid = true;
@@ -35,6 +39,7 @@ function LoginPage() {
 
 
     const handleSubmit = async (e) => {
+        setMessage('');
         e.preventDefault();
         // Reset previous error messages
         setEmailError('');
@@ -61,6 +66,7 @@ function LoginPage() {
             email: email,
             password: password
         }
+        console.log(body);
         try {
             const response = await axios.post(baseURL + '/user/login', body)
             console.log(response.data.data.token)
@@ -71,10 +77,8 @@ function LoginPage() {
         }
         catch (err) {
             console.error(err);
-
-
+            setMessage(err?.response?.data?.message);
         }
-
     };
     return (
         <>
@@ -106,6 +110,9 @@ function LoginPage() {
                                             <button type='submit' className="bg-orange btn" onClick={handleSubmit}>Login </button>
                                         </a>
                                     </div>
+                                    <div>
+                                        <p style={{ color: 'red' }}>{message}</p>
+                                    </div>
                                     <div className="col-12 my-2">
                                         <p className="lh-lg text-center text-light">
                                             Don’t have an account? <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterPage')}> Register</span> .
@@ -121,13 +128,14 @@ function LoginPage() {
                         </div>
                     </div>
                 </div>
-                <div className="" style={{  position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+                <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
-                        <picture className="rcBanner-img-containerr">
-                            <img style={{ marginLeft:'10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg"alt />
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
+                            <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>

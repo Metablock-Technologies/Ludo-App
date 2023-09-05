@@ -1,6 +1,16 @@
 import React from 'react'
+import HeaderComponent from '../HeaderComponent';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 const Runningbattles = ({ runningBattles }) => {
+
+    const navigate = useNavigate();
+
+    const handleOpen = (id, price, roomcode) => {
+        console.log("heyy|", id, price, roomcode);
+        <HeaderComponent />
+        navigate('/EnterFirstGame', { state: { challengeruserid: id, priceplay: price, roomcode: roomcode, type: "runningbattle" } });
+    }
     return (
         <div className="row">
             <div className="col-12 mb-3 d-flex justify-content-between text-light">
@@ -31,6 +41,11 @@ const Runningbattles = ({ runningBattles }) => {
                                 <div className="col-4 d-flex justify-content-end">
                                     <p className="text-light text-end mb-0">{battle.AcceptorUser.username}</p>
                                 </div>
+                                <div>
+                                    <button className="btn bg-orange" style={{ marginTop: '1em', marginBottom: '1em' }} onClick={() => { handleOpen(battle.challenger, battle.price, battle.roomcode) }}>Open</button>
+                                </div>
+                                {/* <button className="btn bg-orange" onClick={() => handleplaybtn(battle.id, battle.price, battle.roomcode, battle.challenger)} >Play</button> */}
+                                {/* <button className="btn bg-orange" onClick={handlePlaybtn}>Play</button> */}
                             </div>
                         </div>
                     </div>

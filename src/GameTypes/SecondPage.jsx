@@ -8,6 +8,7 @@ import "../styles/bootstrap.css"
 import Openbattles from '../Components/Battles/openbattles';
 import Runningbattles from '../Components/Battles/runningbattles';
 import CreateBattles from '../Components/Battles/CreateBattles';
+import Logo from '../Components/Logo';
 
 
 function SecondPage() {
@@ -126,11 +127,12 @@ function SecondPage() {
                 </div >
                 <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
-                        <picture className="rcBanner-img-containerr">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>

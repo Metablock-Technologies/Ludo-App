@@ -4,7 +4,7 @@ import "../../styles/style.css"
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App';
 
-
+import Logo from '../Logo';
 function UserSection() {
 
     const { user } = useContext(AuthContext);
@@ -26,7 +26,7 @@ function UserSection() {
                                 <h6 className="text-light ms-5 rounded-pill " id="profile-id">{user.userID}</h6>
                             </div>
                         </div>
-     
+
                         <div onClick={() => navigate('/ProfilePage')} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
                             <div className="d-flex align-items-center">
                                 <span className="material-symbols-outlined me-2">account_circle</span>
@@ -69,7 +69,7 @@ function UserSection() {
                         </div>
 
 
-                       
+
 
                         {/* 
                         <div onClick={() => navigate('/ReferandEarn')} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
@@ -130,11 +130,12 @@ function UserSection() {
                 </div>
                 <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
-                        <picture className="rcBanner-img-containerr">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>
