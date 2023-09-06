@@ -100,10 +100,12 @@ function LoginPage() {
 
                                     </div>
                                     {passwordError && <p style={{ color: 'red' }} className="error-message">{passwordError}</p>}
+
+
                                     <div className="col-12 my-2">
-                                        <p className="lh-md text-center text-light">
-                                            By Continuing You agree to out <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterLegalPage')}> Legal Terms</span> and you are 18 years of older.
-                                        </p>
+                                        <a href>
+                                            <button type='submit' style={{ color: 'white' }} >Forget Password </button>
+                                        </a>
                                     </div>
                                     <div className="col-12 my-2">
                                         <a href>
@@ -112,6 +114,11 @@ function LoginPage() {
                                     </div>
                                     <div>
                                         <p style={{ color: 'red' }}>{message}</p>
+                                    </div>
+                                    <div className="col-12 my-2">
+                                        <p className="lh-md text-center text-light">
+                                            By Continuing You agree to out <span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterLegalPage')}> Legal Terms</span> and you are 18 years of older.
+                                        </p>
                                     </div>
                                     <div className="col-12 my-2">
                                         <p className="lh-lg text-center text-light">

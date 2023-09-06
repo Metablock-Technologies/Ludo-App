@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import ScreenshotUpload from './SsUpload';
 
-const QRCodeDisplay = () => {
+const QRCodeDisplay = ({ handleOpenQrCode }) => {
     const [showQRCode, setShowQRCode] = useState(false);
     const [showUpload, setShowUpload] = useState(false);
     const [amount, setAmount] = useState(100);
@@ -20,12 +20,9 @@ const QRCodeDisplay = () => {
             {showQRCode ? (
                 <div>
                     {/* Display QR code */}
+                    <p style={{ textAlign: "center", fontSize: "25px" }}>PAY {amount} INR</p>
+                    <button onClick={handleOpenQrCode} className='btn btn-primary' style={{ margin: "auto", display: "block" }}>Scan With Qr Code</button>
 
-                    <div style={{placeItems:'center ' ,marginLeft:'1rem'}}>  <img style={{ width: '300px' }} src="./images/metaBlock.png" alt="QR Code" /></div>
-
-                   
-                    <p>Pay {amount} INR</p>
-                    <p>Scan Qr code, take screenshot and upload the screenshot</p>
                     {showUpload && <ScreenshotUpload amount={amount} />}
                 </div>
             ) : (
@@ -39,7 +36,7 @@ const QRCodeDisplay = () => {
                     </div>
                     <div className="col-12">
                         <a href="#">
-                            <button className="bg-orange btn"  onClick={handlePayClick}>Pay</button>
+                            <button className="bg-orange btn" onClick={handlePayClick}>Pay</button>
                         </a>
                     </div>
                 </>

@@ -31,8 +31,8 @@ const Openbattles = ({ openBattles, fetchData }) => {
                 navigate('/EnterFirstGame', { state: { challengeruserid: challengeid, priceplay: price, roomcode: roomcode, type: "openbattle" } });
             }
         } catch (error) {
-            setMessageError(error.response.data.message);
-            console.error("error:--", error.response.data.message);
+            setMessageError(error?.response?.data?.message);
+            console.error("error:--", error?.response?.data?.message);
         }
     }
     const handlecancelbtn = async (id) => {
@@ -52,7 +52,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
             //     navigate('EnterFirstGame')
             // }
         } catch (error) {
-            setMessageError(error.response.data.message);
+            setMessageError(error?.response?.data?.message);
             console.error("error:--", error);
         }
     }
@@ -74,7 +74,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
                         <div className="row">
                             <div className="col d-flex justify-content-between " >
                                 <h6 className="mx-2">CHALLENGE FROM <span style={{ textTransform: "capitalize" }} className="text-danger">{battle.ChallengerUser.username}</span></h6>
-                                <h6 className="mx-2">1234</h6>
+                                {/* <h6 className="mx-2">{battle.roomcode}</h6> */}
                             </div>
                         </div>
                         <div className="card-body walletbody mt-2">

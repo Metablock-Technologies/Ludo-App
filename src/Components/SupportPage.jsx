@@ -1,7 +1,6 @@
 import React from 'react'
 import HeaderComponent from './HeaderComponent';
-import Logo from '../styles/logo.jpg'
-
+import Logo from './Logo';
 function SupportPage() {
     return (
         <>
@@ -62,7 +61,6 @@ function SupportPage() {
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
                         <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
-
                 </div>
             </section>
 

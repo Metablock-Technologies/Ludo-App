@@ -36,17 +36,10 @@ function HeaderComponent() {
                     <span style={{ cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}><img style={{ width: '40px', borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt /></span>
                 </div>
                 <div className="col-8 d-flex justify-content-end">
-
                     <button className="btn btn-light mx-2 align-items-center" onClick={() => navigate('/LanguagesPage')}><i className="bi bi-translate text-primary" /> Language</button>
-
-
                     <button onClick={() => navigate('/WalletPage')} className="btn btn-light align-items-center"><i className="bi bi-wallet-fill text-success" />{amount}</button>
-
                 </div>
             </div>
-
-
-
         </>
     )
 }

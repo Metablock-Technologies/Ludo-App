@@ -35,7 +35,8 @@ function CreateBattles({ fetchData, battletype }) {
             }
             const requestbody = {
                 category: battletype,
-                price: roundedAmount
+                price: roundedAmount,
+                roomcode: roomcode
             }
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
             // const accessToken = token;
@@ -50,6 +51,7 @@ function CreateBattles({ fetchData, battletype }) {
             if (response.data) {
                 < HeaderComponent />
                 fetchData();
+                setMessageError("battle created successfully");
             }
             // console.log(response);
         } catch (error) {

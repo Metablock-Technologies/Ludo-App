@@ -11,6 +11,7 @@ function EnterFirstGame() {
     const [challengeruser, setChallengerUser] = useState('');
     const [acceptoruser, setAcceptorUser] = useState('');
     const navigate = useNavigate();
+    const [message, setMessage] = useState('');
     // const navigate = useNavigate();
 
     const location = useLocation();
@@ -18,48 +19,92 @@ function EnterFirstGame() {
     const price = location.state.priceplay;
     const challengerid = location.state.challengeruserid;
     const type = location.state.type;
+    const challengeID = location.state.id;
 
 
     const [victory, setVictory] = useState(true);
     const [screenshot, setScreenshot] = useState(null);
-    const [showRequestButton, setShowRequestButton] = useState(false);
     // const [imageUrl, setImageUrl] = useState(null); // State to hold the image URL
 
     const handleScreenshotChange = (e) => {
+        setMessage('')
         const file = e.target.files[0];
         // console.log(file.name, amount);
         setScreenshot(file);
-        setShowRequestButton(true); // Show the request button after uploading
         // setImageUrl(true);
     };
 
-    const handleRequestClick = async (victory) => {
+
+    const handleRequestClick = async () => {
         if (screenshot) {
             try {
+                console.log(challengerid);
                 const formData = new FormData();
                 formData.append('file', screenshot);
+                // formData.append('amount', challengerid);
                 formData.append('victory', victory);
-                formData.append('challengeId', challengerid);
+                formData.append('challengeId', challengeID);
 
-                const accessToken = localStorage.getItem('access_token');
+                const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+                // const accessToken = token;
+                // console.log(accessToken);
                 const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-                console.log(formData);
-
-                const response = await axios.post(baseURL + '/challenge/result', formData, {
-                    headers: headers,
+                // Make API request using axios
+                const responsePromise = axios.post(baseURL + '/challenge/result', formData, {
+                    headers: headers
+                })
+                console.log(responsePromise);
+                responsePromise.then(response => {
+                    console.log('API response data:', response.data);
+                    // setMessageError("sent request successfully");
                 });
-
-                console.log('API response data:', response.data.data);
             } catch (error) {
                 console.error(error);
+                // setMessageError(error?.response?.data?.message);
             }
-        } else {
-            console.error('Screenshot is null.');
         }
     };
 
+    // const handleRequestClick = async () => {
+    //     setMessage('');
+    //     console.log(screenshot);
+    //     if (screenshot) {
+    //         try {
+    //             console.log("screenshot", screenshot);
+    //             console.log("victopry", victory);
+    //             console.log("victory", challengerid);
+
+    //             let formData = new FormData();
+    //             formData.append('file', screenshot);
+    //             formData.append('victory', victory);
+    //             formData.append('challengeId', challengerid);
+
+    //             console.log(formData);
+    //             const accessToken = localStorage.getItem('access_token');
+    //             const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+    //             const response = await axios.post(baseURL + '/challenge/result', formData, {
+    //                 headers: headers,
+    //             });
+
+    //             console.log('API response data:', response.data.data);
+    //             response.then(resp => {
+    //                 console.log('API response data:', resp.data.data);
+    //                 setMessage("request submitted successfully");
+    //             });
+    //         } catch (error) {
+    //             console.error(error);
+    //             setMessage(error?.response?.data?.message)
+    //         }
+    //     } else {
+    //         console.error('Screenshot is null.');
+    //         setMessage("Screenshot is null")
+    //     }
+    // };
+
     const handleBackbtn = () => {
+        setMessage('')
         navigate(-1)
         // console.log("heyy");
         // console.log(navigate);
@@ -68,6 +113,7 @@ function EnterFirstGame() {
         fetch();
     }, [])
     const fetch = async () => {
+        setMessage('');
         try {
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
             // console.log(accessToken);
@@ -87,15 +133,18 @@ function EnterFirstGame() {
             setChallengerUser(reseponsechallenger.data.data.username)
         } catch (error) {
             console.error("error:--", error);
+            setMessage(error?.response?.data?.message);
         }
     }
     const handleCopyCode = () => {
         // copy(roomcode)
+        setMessage("copied code");
         console.log(roomcode);
         navigator.clipboard.writeText(roomcode);
     };
 
     const handleResult = (vict) => {
+        setMessage('')
         setVictory(vict);
     }
     return (
@@ -114,7 +163,7 @@ function EnterFirstGame() {
 
                                 </div>
                                 <div className="col-6 d-flex justify-content-end">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="guide-btn" className="btn btn-outline-primary bg-light">Rules</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="guide-btn" className="btn btn-outline-primary bg-light" style={{ cursor: "pointer" }}>Rules</button>
                                     {/* Modal */}
                                     <div className="modal fade" id="exampleModal2" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">
@@ -176,6 +225,7 @@ function EnterFirstGame() {
                                     <div className="col-12 py-2 ">
                                         <h5 className="text-center text-purple"><strong><span>{roomcode}</span></strong></h5>
                                     </div>
+                                    <p>{message}</p>
                                     <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleCopyCode}>
                                         <button className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center"><i className="bi bi-clipboard2-check" onClick={() => handleCopyCode} />Copy Code</button>
                                     </a>
@@ -229,6 +279,7 @@ function EnterFirstGame() {
                                         <button className="col-12 btn  my-auto btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={() => { handleResult("false") }}>I Lost</button>
                                     </a>
                                 </div>
+                                <p>{message}</p>
                             </div>
                             <div className="col-12 card my-3 walletcard pt-2 px-0 mx-auto text-white">
                                 <div className="text-center">Penalty</div>
@@ -283,6 +334,7 @@ function EnterFirstGame() {
                                             <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleRequestClick}>
                                                 <button className="col-12 btn  my-auto btn-success">Post Result</button>
                                             </a>
+                                            <p>{message}</p>
                                         </div>
                                     </div>
                                 </div>

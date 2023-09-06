@@ -57,7 +57,6 @@ function UserSection() {
                             </div>
                         </div>
 
-
                         <div onClick={() => navigate('/HistoryPage')} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
                             <div className="d-flex align-items-center">
                                 <span className="material-symbols-outlined me-2">history</span>
@@ -140,9 +139,6 @@ function UserSection() {
 
                 </div>
             </section>
-
-
-
         </>
 
     )

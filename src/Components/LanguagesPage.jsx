@@ -1,6 +1,6 @@
 import React from 'react'
 import HeaderComponent from './HeaderComponent';
-import Logo from '../styles/logo.jpg'
+import Logo from './Logo';
 
 function LanguagesPage() {
     return (
@@ -10,7 +10,6 @@ function LanguagesPage() {
                     <div className="row">
                         <div className="col-12">
                             <HeaderComponent />
-
                         </div>
                     </div>
                     <div className="row   d-flex justify-content-center" id="language">
@@ -51,10 +50,8 @@ function LanguagesPage() {
             <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
             <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
-
                 </div>
             </section>
-
         </>
     )
 }

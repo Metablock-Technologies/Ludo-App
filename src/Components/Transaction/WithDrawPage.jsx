@@ -19,8 +19,9 @@ function WithDrawPage() {
             setErrorMessage('UPI IDs do not match.');
             return;
         }
+        console.log(chipAmount);
 
-        if (!upiId && !chipAmount) {
+        if (!chipAmount) {
             setErrorMessage("please fill all feilds");
             return;
         }

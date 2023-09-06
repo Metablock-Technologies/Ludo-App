@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import HeaderComponent from './HeaderComponent'
-import Logo from '../styles/logo.jpg'
+import Logo from './Logo';
 
 function LegalPage() {
-
     const [activeCard, setActiveCard] = useState(null);
     const [enable, setEnable] = useState(false);
     const handleCardClick = (cardNumber) => {
@@ -11,16 +10,13 @@ function LegalPage() {
         setActiveCard(cardNumber);
     };
 
-
     return (
         <>
-
             <section id="main-bg">
                 <div id="legalterms-container" className="container mx-0">
                     <div className="row">
                         <div className="col-12 mb-5">
                             <HeaderComponent />
-
                         </div>
                         <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="row" id="card1" onClick={() => handleCardClick(1)} >

@@ -18,11 +18,12 @@ function ProfilePage() {
         phone: ''
     });
     const [name, setName] = useState('');
-
     const [enable, setEnable] = useState(true);
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
     const fetchdata = async () => {
+        setMessage('')
         try {
             const accessToken = localStorage.getItem('access_token');
             const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
@@ -70,6 +71,7 @@ function ProfilePage() {
         fetchdata();
     }
     const handleSave = async () => {
+        setMessage('');
         try {
             const reqbody = {
                 name: name
@@ -84,6 +86,7 @@ function ProfilePage() {
             if (responsedetail) {
                 fetchdata();
                 setEnable(true);
+                setMessage("edited successfully");
             }
         } catch (error) {
             console.log(error);
@@ -130,6 +133,7 @@ function ProfilePage() {
                                                 </>
                                                 )}
                                         </a>
+                                        <p>{message}</p>
                                     </div>
                                     <div className="col-12 my-2">
                                         <label htmlFor="mobile number" className="text-left text-yellow">Mobile Number</label>

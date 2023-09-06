@@ -3,12 +3,19 @@ import HeaderComponent from '../HeaderComponent';
 import { Navigate, useNavigate } from 'react-router-dom';
 import QRCodeDisplay from './Qrcode';
 import Logo from '../Logo';
+import ScannerDialog from "./Dialog.js"
 
 function AddChipsPage() {
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false)
+
+    const handleOpenQrCode = () => {
+        setOpen(true)
+    }
 
     return (
         <>
+            <ScannerDialog open={open} setOpen={setOpen} />
             <section id="main-bg">
                 <div id="wallet-container" className="container mx-0">
                     <div className="row">
@@ -30,7 +37,7 @@ function AddChipsPage() {
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Guide Vedio</h1>
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Guide Video</h1>
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                                                 </div>
                                                 <div className="modal-body">
@@ -45,26 +52,9 @@ function AddChipsPage() {
                         <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="text-center">Buy Chips</div>
                             <div className="card-body walletbody mt-2">
-                                {/* <div className="col-12 my-3">
-                                    <label htmlFor="username" className="text-left text-yellow">Enter Amount</label>
-                                </div>
-                                <div className="col-12 mb-4 d-flex justify-content-center">
-                                    <button id="buy-chips-btn" className="text-light"><i className="bi bi-currency-rupee" /></button>
-                                    <input id="buy-chips-input" className="text-yellow" type="text" defaultValue={500} />
-                                </div>
-                                <div className="col-12">
-                                    <a href="#">
-                                        <button className="bg-orange btn">Pay</button>
-                                    </a>
-                                </div> */}
-                                {/* Display QR code and pay text */}
-                                <QRCodeDisplay />
 
-                                {/* Screenshot upload */}
-                                {/* <ScreenshotUpload onUpload={handleScreenshotUpload} /> */}
+                                <QRCodeDisplay handleOpenQrCode={handleOpenQrCode} />
 
-                                {/* API request */}
-                                {/* <ApiRequest amount={500} screenshot={uploadedScreenshot} /> */}
                             </div>
                         </div>
                         <div className="col-12 my-3">

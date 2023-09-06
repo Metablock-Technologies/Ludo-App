@@ -12,9 +12,10 @@ function HistoryPage() {
     const [accessUserId, setAccessUserID] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const itemsPerPage = 6;
+    const itemsPerPage = 5; // Updated to display 5 items per page initially
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
+
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
