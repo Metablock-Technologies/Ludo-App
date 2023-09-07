@@ -5,6 +5,7 @@ import { useScrollTrigger } from '@mui/material';
 import { baseURL, } from '../token';
 import axios from 'axios';
 import copy from "copy-to-clipboard";
+import Logo from '../Components/Logo';
 // import ScreenshotUpload from '../Components/Transaction/SsUpload';
 
 function EnterFirstGame() {
@@ -36,6 +37,7 @@ function EnterFirstGame() {
 
 
     const handleRequestClick = async () => {
+        setMessage('')
         if (screenshot) {
             try {
                 console.log(challengerid);
@@ -57,11 +59,11 @@ function EnterFirstGame() {
                 console.log(responsePromise);
                 responsePromise.then(response => {
                     console.log('API response data:', response.data);
-                    // setMessageError("sent request successfully");
+                    setMessage("sent request successfully");
                 });
             } catch (error) {
                 console.error(error);
-                // setMessageError(error?.response?.data?.message);
+                setMessage(error?.response?.data?.message);
             }
         }
     };
@@ -325,7 +327,7 @@ function EnterFirstGame() {
                                     <div className="modal-content">
                                         <div className="modal-header">
                                             <h1 className="modal-title fs-5" id="exampleModalLabel">Upload Result</h1>
-                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setMessage("") }} />
                                         </div>
                                         <div className="modal-body">
                                             <a className="text-center row my-2 mx-auto text-decoration-none">
@@ -342,6 +344,17 @@ function EnterFirstGame() {
                         </div>
                     }
                 </div>
+                <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>
+                    <div className="rcBanner flex-center">
+                        <Logo />
+                        {/* <picture className="rcBanner-img-containerr">
+                            <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
+                        </picture>
+                        <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
+                    </div>
+
+                </div >
             </section>
 
         </>

@@ -88,7 +88,7 @@ function RegisterPage() {
             console.log("mode", queryParams.mode)
             const requestBody = {
                 phone: "91" + phoneNumber,
-                OTP: otpInputs,
+                OTP: otpInputs.join(""),
                 email: email,
                 role: 'basic'
             };
@@ -107,9 +107,16 @@ function RegisterPage() {
                 setIsVerifying(false);
                 setShowOtpFields(false);
                 setIsGetOtpDisabled(true);
+                setOtpInputs(['', '', '', '']);
 
                 if (response.status === 200 && isEmailVerified) {
-                    navigate(`/SignUpPage?name=${name}&phoneNumber=${phoneNumber}&email=${email}`);
+                    // navigate(`/SignUpPage?name=${name}&phoneNumber=${phoneNumber}&email=${email}`);
+                    const signupData = {
+                        name: name,
+                        phoneNumber: phoneNumber,
+                        email: email,
+                    }
+                    navigate(`/SignUpPage`, { state: signupData });
                     localStorage.setItem('access_token', response.data.data.accessToken);
                 }
             }
@@ -136,39 +143,61 @@ function RegisterPage() {
     };
 
 
-    const handleResendClick = () => {
-        if (resendTimer === 0) {
-            handleGetOtpClick();
-            setResendTimer(30);
+    // const handleResendClick = (e) => {
+    //     e.preventDefault();
+    //     console.log("heyy");
+    //     setResendTimer(29);
+    //     startTimer();
+    //     // e.preventDefault();
+    //     // // if (resendTimer === 0) {
+    //     // // Call the startTimer function to restart the timer
+    //     // }
+    // };
+
+    const handleResendClick = (e) => {
+        e.preventDefault();
+        console.log("heyy");
+        clearInterval(interval);
+
+        // Set the timer to 29 first
+        setResendTimer(29);
+        if (resendTimer === 29) {
+            console.log(heyy);
             startTimer();
         }
+        startTimer();
+        handleGetOtpClick();
+        // Wait for a brief moment (e.g., 100ms) before starting the timer
+        // await new Promise((resolve) => setTimeout(resolve, 10));
+        // // Now start the timer
+        // startTimer();
     };
+
+
     var interval
     var clearTimer = false;
     const startTimer = () => {
-        let timer = 30;
+        console.log(resendTimer);
+        let timer = resendTimer; // Set the initial timer value
         interval = setInterval(() => {
             timer--;
-
-            setResendTimer(timer);
-            handleTimerExpiry();
-            clearInterval(interval)
-
-
+            if (timer <= 0) {
+                // Timer has reached 00:00, so clear the interval and show the resend OTP button
+                clearInterval(interval);
+                setResendTimer(0);
+            } else {
+                // Update the timer value
+                setResendTimer(timer);
+            }
         }, 1000);
-
     };
-
-
 
     useEffect(() => {
         setIsGetOtpDisabled(
             !name.trim() ||
             !phoneNumber.trim() &&
             !email.trim() ||
-
             (showEmailField && !email)
-
         );
     }, [name, phoneNumber, email]);
 
@@ -203,16 +232,10 @@ function RegisterPage() {
                                             <input
                                                 type="text"
                                                 placeholder="Phone number"
-                                                disabled={isOtpFieldsShown} // Disable the input field if OTP fields are shown
+                                                disabled={isPhoneNumberVerified} // Disable the input field if OTP fields are shown
                                                 onChange={(e) => setPhoneNumber(e.target.value)} />
                                         </div>
                                         <p style={{ color: 'red' }}>{phoneNumberError}</p>
-                                        <div className="col-12 my-2">
-                                            <input
-                                                type="text"
-                                                placeholder="Refer Code( optional )"
-                                                onChange={(e) => setReferCode(e.target.value)} />
-                                        </div>
                                         {showEmailField && (
                                             <div className="col-12 my-2">
                                                 <input
@@ -226,6 +249,12 @@ function RegisterPage() {
                                                 />
                                             </div>
                                         )}
+                                        <div className="col-12 my-2">
+                                            <input
+                                                type="text"
+                                                placeholder="Refer Code( optional )"
+                                                onChange={(e) => setReferCode(e.target.value)} />
+                                        </div>
                                         {showOtpFields ? (
                                             <>
                                                 <div style={{ paddingTop: '20px' }} className="col-12 d-flex my-2 otp-input">
@@ -309,8 +338,10 @@ function RegisterPage() {
                                                 <>
                                                     <button
                                                         className="bg-orange btn"
-                                                        onClick={handleGetOtpClick}
-                                                        disabled={isGetOtpDisabled}
+                                                        onClick={(e) => {
+                                                            e.preventDefault(); // Add this line to prevent the default behavior
+                                                            handleGetOtpClick(e);
+                                                        }} disabled={isGetOtpDisabled}
                                                     >
                                                         Get OTP
                                                     </button>
@@ -319,7 +350,7 @@ function RegisterPage() {
                                         </div>
                                         <div className="col-12 my-2">
                                             <p className="lh-lg text-center text-light">
-                                                By Continuing You agree to out<span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterLegalPAge')}> Legal Terms</span> and you are 18 years of older.
+                                                By Continuing You agree to out<span style={{ color: '#ffb900', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => navigate('/RegisterLegalPage')}> Legal Terms</span> and you are 18 years of older.
                                             </p>
                                         </div>
                                         <div className="col-12 my-2">
@@ -340,7 +371,7 @@ function RegisterPage() {
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>

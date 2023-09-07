@@ -20,7 +20,10 @@ import SecondPage from './GameTypes/SecondPage';
 import EnterFirstGame from './GameTypes/EnterFirstGame';
 import OTPPage from './Components/Authentication/OTPPage';
 import SignUpPage from './Components/Authentication/SignUpPage';
-import RegisterLegalPAge from './Components/RegisterLegalPAge';
+import RegisterLegalPage from './Components/RegisterLegalPAge';
+import ForgetEmail from './Components/ForgetPassword/ForgetEmail';
+import GetForgetOtp from './Components/ForgetPassword/GetForgetOtp';
+import ChangePassword from './Components/ForgetPassword/ChangePassword';
 
 function PrivateRoute({ element }) {
     // const { isLoggedIn } = useAuth();
@@ -52,8 +55,13 @@ function App() {
                     <Routes>
                         <Route exact path='/' element={<MainPage />}></Route>
                         <Route exact path='/RegisterPage' element={<RegisterPage />}></Route>
-                        <Route exact path="/RegisterLegalPAge" element={<RegisterLegalPAge />}></Route>
+                        <Route exact path="/RegisterLegalPage" element={<RegisterLegalPage />}></Route>
                         <Route exact path='/LoginPage' element={<LoginPage />}></Route>
+
+                        <Route exact path='/forgetPassword' element={<ForgetEmail />}></Route>
+                        <Route exact path='/getForgetOtp' element={<GetForgetOtp />}></Route>
+                        <Route exact path='/changePassword' element={<ChangePassword />}></Route>
+
                         <Route exact path='/OTPPage' element={<OTPPage />} />
                         <Route exact path='/SignUpPage' element={<SignUpPage />} ></Route>
                         <Route exact path='/UserPage' element={<PrivateRoute element={<UserPage />} />} ></Route>

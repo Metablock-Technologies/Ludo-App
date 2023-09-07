@@ -14,18 +14,25 @@ function SignUpPage() {
     const navigate = useNavigate();
     // access token : = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjQyLCJyb2xlIjoiYmFzaWMiLCJpYXQiOjE2OTI1MzI3NjksImV4cCI6MTY5NTEyNDc2OX0.nZk-UknVgBpPpgWvqfIIBsIma_fRNCYoXsApIPbdbsk"
     const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const accessToken = localStorage.getItem('access_token');
+    const { state } = location;
 
-    const name = queryParams.get('name') || '';
-    const phoneNumber = queryParams.get('phoneNumber') || '';
-    const email = queryParams.get('email') || '';
+    // Access the data from state or query parameters
+    const name = state ? state.name : '';
+    const phoneNumber = state ? state.phoneNumber : '';
+    const email = state ? state.email : '';
+    // const queryParams = new URLSearchParams(location.search);
+    // const accessToken = localStorage.getItem('access_token');
+
+    // const name = queryParams.get('name') || '';
+    // const phoneNumber = queryParams.get('phoneNumber') || '';
+    // const email = queryParams.get('email') || '';
 
     const { user, setUser } = useContext(AuthContext)
 
     const handleSignUpClick = async () => {
         setMessage('');
         console.log(localStorage.getItem('access_token'));
+        const accessToken = localStorage.getItem('access_token');
         const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
         // POST main body  bhi bhj ni pd ti h to vo ase h  :
@@ -90,7 +97,7 @@ function SignUpPage() {
                                     <p className="lh-lg text-center text-light">By Continuing You agree to out<span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}> Legal Terms</span> and you are 18 years of older.</p>
                                 </div>
                                 <div className="col-12 my-2">
-                                    <p className="lh-lg text-center text-light">Already have an account?  <span style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}> Login</span>.</p>
+                                    <p className="lh-lg text-center text-light">Already have an account?  <span style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => { navigate('/LoginPage') }}> Login</span>.</p>
                                 </div>
                             </div>
                         </div>

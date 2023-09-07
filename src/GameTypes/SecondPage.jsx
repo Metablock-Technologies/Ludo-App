@@ -43,15 +43,15 @@ function SecondPage() {
             let queryParams;
             if (inputAmount != 0) {
                 queryParams = {
-                    limit: 10,
-                    offset: 0,
+                    // limit: 10,
+                    // offset: 0,
                     price: roundedAmount
                 };
             }
             else {
                 queryParams = {
-                    limit: 10,
-                    offset: 0
+                    // limit: 10,
+                    // offset: 0
                 };
             }
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
@@ -68,7 +68,7 @@ function SecondPage() {
             const responsedata = response.data.data.rows;
             console.log("response", responsedata);
             const filteredCreated = responsedata.filter(battle => battle.category === propValue && battle.status === 'created');
-            // console.log(filteredCreated);
+            console.log("responseeee", filteredCreated);
             setOpenBattles(filteredCreated)
             // console.log(responsedata);
 

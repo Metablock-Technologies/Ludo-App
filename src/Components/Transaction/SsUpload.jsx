@@ -78,7 +78,7 @@ const ScreenshotUpload = ({ amount }) => {
             <div class="input-group mb-3 mt-3" onChange={handleScreenshotChange} >
                 <input type="file" class="form-control" id="inputGroupFile02" accept="image/*" />
             </div>
-            {showRequestButton && <button onClick={handleRequestClick}>Send Request</button>}
+            {showRequestButton && <button onClick={handleRequestClick} className='btn bg-orange'>Send Request</button>}
             <p>{messageError}</p>
             {/* Display the image */}
             {/* {imageUrl && <img src={imageUrl} alt="Uploaded Screenshot" />} */}

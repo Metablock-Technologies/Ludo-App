@@ -1,14 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "../../styles/bootstrap.css"
 import "../../styles/style.css"
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App';
+import { baseURL } from '../../token';
+import axios from 'axios';
 
 import Logo from '../Logo';
 function UserSection() {
 
-    const { user } = useContext(AuthContext);
+    // const { user } = useContext(AuthContext);
+    const [user, setUser] = useState('');
     const navigate = useNavigate();
+
+    const fetchdata = async () => {
+        try {
+            const accessToken = localStorage.getItem('access_token');
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const responsedetail = await axios.get(baseURL + '/user', {
+                headers: headers,
+            });
+
+            const responseData = responsedetail.data.data;
+            setUser(responseData);
+        } catch (error) {
+
+        }
+    }
+    useEffect(() => {
+        fetchdata();
+    }, [user])
 
     return (
         <>
@@ -21,9 +43,11 @@ function UserSection() {
                                 <img src="./images/img.jpg" className="rounded-circle" style={{ width: '100%' }} alt />
                             </div>
                             <div id="profile-info-bg">
-                                <h5 className=" text-light pt-2 mb-0 ms-5">{user.name}</h5>
-                                <p className="text-light ms-5 mb-0">{user.memberType}</p>
-                                <h6 className="text-light ms-5 rounded-pill " id="profile-id">{user.userID}</h6>
+                                <h5 style={{ textTransform: "capitalize" }} className=" text-light pt-2 mb-0 ms-5">{user?.name}</h5>
+                                <p className="text-light ms-5 mb-0">{user?.username}</p>
+                                <p className="text-light ms-5 mb-0">{user?.phone}</p>
+                                <p className="text-light ms-5 mb-0">{user?.email}</p>
+                                {/* <h6 className="text-light ms-5 rounded-pill " id="profile-id">{user?.email}</h6> */}
                             </div>
                         </div>
 
@@ -134,7 +158,7 @@ function UserSection() {
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
                 </div>

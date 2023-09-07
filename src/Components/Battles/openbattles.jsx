@@ -69,7 +69,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
             </div>
             <div className='scroll-container'>
                 <p style={{ color: 'white' }}>{messageError}</p>
-                {openBattles.map((battle, index) => (
+                {openBattles?.map((battle, index) => (
                     <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white" key={index}>
                         <div className="row">
                             <div className="col d-flex justify-content-between " >

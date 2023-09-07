@@ -3,7 +3,7 @@ import { useState } from 'react';
 import HeaderComponent from './HeaderComponent';
 import Logo from '../styles/logo.jpg'
 
-function RegisterLegalPAge() {
+function RegisterLegalPage() {
     const [activeCard, setActiveCard] = useState(null);
 
     const handleCardClick = (cardNumber) => {
@@ -32,7 +32,7 @@ function RegisterLegalPAge() {
                                 <div className="row">
                                     <div className="col-12">
                                         <p className="text-light lh-lg">
-                                            These <strong className="text-purple">terms and conditions</strong>  of use (“Terms”) along with privacy policy (“Privacy Policy”) forms a legally binding agreement (“Agreement”) between You and us <a href className="text-warning">( ludoplayers.com )</a>
+                                            These <strong className="text-purple">terms and conditions</strong>  of use (“Terms”) along with privacy policy (“Privacy Policy”) forms a legally binding agreement (“Agreement”) between You and us <a href className="text-warning">( ludoKavish.com )</a>
                                             <br />
                                             Hence, We insist that You read these Terms and Privacy Policy and let Us know if You have any questions regarding the same. We will try Our best to answer Your queries.
                                             <br />
@@ -145,15 +145,15 @@ function RegisterLegalPAge() {
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
 
-                </div>
+                </div >
 
-            </section>
+            </section >
         </>
     )
 
 }
 
-export default RegisterLegalPAge;
+export default RegisterLegalPage;

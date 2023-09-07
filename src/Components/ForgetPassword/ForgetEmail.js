@@ -2,91 +2,41 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { baseURL } from '../../token';
 import Logo from '../Logo';
 
-function LoginPage() {
+function ForgetEmail() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
     const [message, setMessage] = useState('');
 
-
-    const handleValidation = () => {
-        // Reset previous error messages
-        setEmailError('');
-        setPasswordError('');
-        setMessage('')
-
-        // Perform validation
-        let isValid = true;
-
-        if (!validator.isEmail(email)) {
-            setEmailError('Invalid email format');
-            isValid = false;
-        }
-
-        if (validator.isEmpty(password)) {
-            setPasswordError('Password is required');
-            isValid = false;
-        }
-
-        return isValid;
-    };
-
-
-    const handleSubmit = async (e) => {
-        setMessage('');
-        e.preventDefault();
-        // Reset previous error messages
-        setEmailError('');
-        setPasswordError('');
-
-        // Perform validation
-        if (!validator.isEmail(email)) {
-            setEmailError('Invalid email format');
-        }
-        if (validator.isEmpty(password)) {
-            setPasswordError('Password is required');
-        }
-
-        // If no errors, proceed with form submission
-        if (validator.isEmail(email) && !validator.isEmpty(password)) {
-            // Perform your submission logic here
-        }
-        if (handleValidation()) {
-            // Validation passed, proceed with form submission logic
-            console.log('Form submitted successfully');
-        }
-
-        const body = {
-            email: email,
-            password: password
-        }
-        console.log(body);
+    const handleSubmit = async () => {
         try {
-            const response = await axios.post(baseURL + '/user/login', body)
-            console.log(response.data.data.token)
-            localStorage.setItem('access_token', response.data.data.token);
-            if (response.status === 200) {
-                navigate('/UserPage')
+            const body = {
+                email: email,
+                role: 'basic'
             }
+            const response = await axios.post(baseURL + '/user/otpemail', body)
+            if (response) {
+                const handlestate = {
+                    email: email
+                }
+                navigate("/getForgetOtp", { state: handlestate })
+            }
+        } catch (error) {
+            console.log(error);
+            setMessage(error?.response?.data?.message);
         }
-        catch (err) {
-            console.error(err);
-            setMessage(err?.response?.data?.message);
-        }
-    };
+    }
     return (
         <>
             <section id="main-bg">
                 <div id="login-container" className="container mx-0">
                     <div className="row " id="login">
                         <div className="card h-100 p-0">
-                            <h4 className="text-center py-2">Login</h4>
+                            <h4 className="text-center py-2">Forget Password</h4>
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-12 my-2 mt-4">
@@ -94,22 +44,9 @@ function LoginPage() {
                                             style={{ borderColor: emailError ? 'red' : '' }} />
                                         {emailError && <p style={{ color: 'red' }} className="error-message">{emailError}</p>}
                                     </div>
-                                    <div className="col-12 my-2 mt-4">
-                                        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}
-                                            style={{ borderColor: passwordError ? '1px solid red' : '' }} />
-
-                                    </div>
-                                    {passwordError && <p style={{ color: 'red' }} className="error-message">{passwordError}</p>}
-
-
                                     <div className="col-12 my-2">
                                         <a href>
-                                            <button type='submit' style={{ color: 'white' }} onClick={() => navigate("/forgetPassword")}>Forget Password</button>
-                                        </a>
-                                    </div>
-                                    <div className="col-12 my-2">
-                                        <a href>
-                                            <button type='submit' className="bg-orange btn" onClick={handleSubmit}>Login </button>
+                                            <button type='submit' className="bg-orange btn" onClick={handleSubmit}>Get Otp </button>
                                         </a>
                                     </div>
                                     <div>
@@ -147,4 +84,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage;
+export default ForgetEmail;

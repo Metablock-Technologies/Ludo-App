@@ -136,7 +136,7 @@ function HistoryPage() {
                             <img style={{ width: "100% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo  <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience  , open&nbsp;<span style={{ cursor: "pointer", color: '#ffb900' }}>LudoPlayers.com</span>
+                        <div className="rcBanner-footer">For best experience  , open&nbsp;<span style={{ cursor: "pointer", color: '#ffb900' }}>ludokavish.com</span>
                             &nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
                 </div>

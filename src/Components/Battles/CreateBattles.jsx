@@ -52,6 +52,8 @@ function CreateBattles({ fetchData, battletype }) {
                 < HeaderComponent />
                 fetchData();
                 setMessageError("battle created successfully");
+                setCreateBattles('');
+                setRoomcode('');
             }
             // console.log(response);
         } catch (error) {
@@ -90,6 +92,7 @@ function CreateBattles({ fetchData, battletype }) {
                                 type="text"
                                 onChange={(e) => setCreateBattles(e.target.value)}
                                 placeholder='Enter Amount'
+                                value={createBattles}
                             />
                         </div>
                         <div className="col-12 my-2">
@@ -97,6 +100,7 @@ function CreateBattles({ fetchData, battletype }) {
                                 type="text"
                                 onChange={(e) => setRoomcode(e.target.value)}
                                 placeholder='Enter Your Room code'
+                                value={roomcode}
                             />
                         </div>
                     </div>

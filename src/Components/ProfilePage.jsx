@@ -133,8 +133,8 @@ function ProfilePage() {
                                                 </>
                                                 )}
                                         </a>
-                                        <p>{message}</p>
                                     </div>
+                                    <p>{message}</p>
                                     <div className="col-12 my-2">
                                         <label htmlFor="mobile number" className="text-left text-yellow">Mobile Number</label>
                                     </div>
@@ -260,7 +260,7 @@ function ProfilePage() {
                             <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src="./images/Ludolkjpg.jpg" alt />
                         </picture>
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
-                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">LudoPlayers.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
+                        <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
                 </div>
             </section>

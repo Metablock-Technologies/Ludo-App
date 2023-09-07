@@ -27,7 +27,7 @@ const Runningbattles = ({ runningBattles }) => {
                             </div>
                             <div className="col d-flex justify-content-end me-2">
                                 <p className="mb-0">Prize&nbsp;</p>
-                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {battle.price}</h6>
+                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((5 * battle.price * 2) / 100)}</h6>
                             </div>
                         </div>
                         <div className="card-body walletbody mt-2">
