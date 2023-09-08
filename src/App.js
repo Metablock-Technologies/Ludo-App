@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import UserPage from './Components/UserView/UserPage';
 import WalletPage from './Components/Transaction/WalletPage';
 import HistoryPage from './Components/HistoryPage';
@@ -51,7 +51,7 @@ function App() {
     return (
         <>
             <AuthContext.Provider value={{ user, setUser }}>
-                <BrowserRouter>
+                <HashRouter>
                     <Routes>
                         <Route exact path='/' element={<MainPage />}></Route>
                         <Route exact path='/RegisterPage' element={<RegisterPage />}></Route>
@@ -81,7 +81,7 @@ function App() {
                         <Route exact path='/WithDrawPage' element={<PrivateRoute element={<WithDrawPage />} />
                         } ></Route >
                     </Routes >
-                </BrowserRouter >
+                </HashRouter >
             </AuthContext.Provider >
         </>
     )

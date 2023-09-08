@@ -35,7 +35,7 @@ const QRCodeDisplay = ({ handleOpenQrCode }) => {
                         <input id="buy-chips-input" className="text-yellow" type="text" onChange={(e) => { handleamount(e) }} value={amount} />
                     </div>
                     <div className="col-12">
-                        <a href="#">
+                        <a >
                             <button className="bg-orange btn" onClick={handlePayClick}>Pay</button>
                         </a>
                     </div>

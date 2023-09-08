@@ -156,13 +156,13 @@ function RegisterPage() {
 
     const handleResendClick = (e) => {
         e.preventDefault();
-        console.log("heyy");
+        // console.log("heyy");
         clearInterval(interval);
 
         // Set the timer to 29 first
         setResendTimer(29);
         if (resendTimer === 29) {
-            console.log(heyy);
+            // console.log(heyy);
             startTimer();
         }
         startTimer();

@@ -24,6 +24,12 @@ function HeaderComponent() {
     };
     useEffect(() => {
         fetchtransaction();
+
+        // Set up a polling interval (e.g., every 5 seconds)
+        // const intervalId = setInterval(fetchtransaction, 5000);
+
+        // // Clean up the interval on component unmount
+        // return () => clearInterval(intervalId);
     }, [])
 
     return (

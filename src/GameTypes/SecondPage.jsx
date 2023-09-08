@@ -9,12 +9,17 @@ import Openbattles from '../Components/Battles/openbattles';
 import Runningbattles from '../Components/Battles/runningbattles';
 import CreateBattles from '../Components/Battles/CreateBattles';
 import Logo from '../Components/Logo';
+import MyBattles from '../Components/Battles/MyBattles';
 
 
 function SecondPage() {
     const [inputAmount, setInputAmount] = useState(0)
     const [openBattles, setOpenBattles] = useState([])
     const [runningBattles, setRunningBattles] = useState([])
+    const [judgement, setJudgementBattles] = useState([])
+    // const [challenger, setChallengerUser] = useState("");
+    // const [acceptor, setAcceptorUser] = useState("");
+
     const navigate = useNavigate();
     // const [sliderValue, setSliderValue] = useState(500)
     const location = useLocation();
@@ -74,6 +79,8 @@ function SecondPage() {
 
             const filteredRunning = responsedata.filter(battle => battle.category === propValue && battle.status === 'running');
             setRunningBattles(filteredRunning);
+            const filteredjudgement = responsedata.filter(battle => battle.category === propValue && battle.status === 'judgement');
+            setJudgementBattles(filteredjudgement);
             // console.log(filteredRunning);
 
         } catch (error) {
@@ -83,6 +90,7 @@ function SecondPage() {
     useEffect(() => {
         fetchData()
     }, [])
+
     // useEffect(() => {
     //     const timeoutId = setTimeout(() => {
     //         fetchData()
@@ -116,6 +124,9 @@ function SecondPage() {
                         </div> */}
                         <div className="col-12 my-2 bg-purple2 py-3">
                             <CreateBattles fetchData={fetchData} battletype={propValue} />
+                        </div>
+                        <div className="col-12 my-2 bg-purple2 py-3">
+                            <MyBattles runningBattles={runningBattles} judgement={judgement} />
                         </div>
                         <div className="col-12 my-2 bg-purple2 py-3">
                             <Openbattles openBattles={openBattles} fetchData={fetchData} />

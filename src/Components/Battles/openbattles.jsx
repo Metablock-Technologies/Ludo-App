@@ -25,6 +25,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
                 headers: headers
             });
             fetchData();
+            setMessageError('')
             console.log(response);
             if (response) {
                 <HeaderComponent />
@@ -87,7 +88,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
                                         </div>
                                         <div className="ms-2">
                                             <p className="mb-0" id="win-time">Prize</p>
-                                            <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {battle.price}</h6>
+                                            <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((5 * battle.price * 2) / 100)}</h6>
                                         </div>
                                     </div>
                                     <div>

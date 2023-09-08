@@ -71,8 +71,8 @@ function HistoryPage() {
                             <HeaderComponent />
                         </div>
                         <div className="col-12 my-4">
-                            <button className="history-btn rounded-pill mx-2" id="classic-btn" onClick={handleClassic}>Classic</button>
-                            <button className="history-btn rounded-pill mx-2" id="wallet-btn" onClick={handleWallet}>Wallet</button>
+                            <button className="history-btn rounded-pill mx-2" id="classic-btn" onClick={handleClassic}>Coin Transactions</button>
+                            <button className="history-btn rounded-pill mx-2" id="wallet-btn" onClick={handleWallet}>Money Transactions</button>
                         </div>
                     </div>
                     <div className="row" id="all">
@@ -89,7 +89,7 @@ function HistoryPage() {
                                                 <h6 style={{ textTransform: "capitalize" }} className="mb-0"><strong>{item?.message}</strong></h6>
                                                 <h6 style={{ textTransform: "capitalize" }} className="mb-0"><strong>{item?.Receiver?.username}</strong></h6>
                                                 <h6 style={{ textTransform: "capitalize" }} className={`mb-0 text-end ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
-                                                    ({item?.sender === accessUserId ? '+' : '-'}){item?.amount}
+                                                    ({item?.sender === accessUserId ? '-' : '+'}){item?.amount}
                                                 </h6>
                                             </div>
                                         </div>

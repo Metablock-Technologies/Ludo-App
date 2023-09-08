@@ -50,10 +50,11 @@ function CreateBattles({ fetchData, battletype }) {
 
             if (response.data) {
                 < HeaderComponent />
-                fetchData();
                 setMessageError("battle created successfully");
                 setCreateBattles('');
                 setRoomcode('');
+                setMessageError('');
+                fetchData();
             }
             // console.log(response);
         } catch (error) {

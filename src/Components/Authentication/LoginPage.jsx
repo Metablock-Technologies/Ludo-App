@@ -101,7 +101,6 @@ function LoginPage() {
                                     </div>
                                     {passwordError && <p style={{ color: 'red' }} className="error-message">{passwordError}</p>}
 
-
                                     <div className="col-12 my-2">
                                         <a href>
                                             <button type='submit' style={{ color: 'white' }} onClick={() => navigate("/forgetPassword")}>Forget Password</button>

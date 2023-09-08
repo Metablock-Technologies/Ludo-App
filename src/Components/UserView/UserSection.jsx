@@ -30,6 +30,12 @@ function UserSection() {
     }
     useEffect(() => {
         fetchdata();
+
+        // Set up a polling interval (e.g., every 5 seconds)
+        // const intervalId = setInterval(fetchdata, 5000);
+
+        // // Clean up the interval on component unmount
+        // return () => clearInterval(intervalId);
     }, [user])
 
     return (
