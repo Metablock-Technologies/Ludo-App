@@ -77,6 +77,12 @@ const ScreenshotUpload = ({ amount }) => {
             {/* <input style={{ margin: "auto", display: "flex", justifyContent: "center", marginTop: "20px" }} type="file" accept="image/*" onChange={handleScreenshotChange} /> */}
             <div class="input-group mb-3 mt-3" onChange={handleScreenshotChange} >
                 <input type="file" class="form-control" id="inputGroupFile02" accept="image/*" />
+                <div className="col-12 my-1">
+                    <label htmlFor="username" className="text-left text-yellow" >Re Enter UPI ID</label>
+                </div>
+                <div className="col-12 mb-4">
+                    <input type="text" className="details" placeholder="1234567890@paytm" />
+                </div>
             </div>
             {showRequestButton && <button onClick={handleRequestClick} className='btn bg-orange'>Send Request</button>}
             <p>{messageError}</p>
