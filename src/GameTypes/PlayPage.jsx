@@ -3,8 +3,11 @@ import HeaderComponent from '../Components/HeaderComponent';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../Components/Logo';
 // import { useHistory } from 'react-router-dom';
+import { baseURL } from '../token';
+import axios from 'axios';
 
 function PlayPage() {
+    const [commision, setCommision] = useState('');
     const navigate = useNavigate();
     // const history = useHistory();
 
@@ -12,13 +15,33 @@ function PlayPage() {
         navigate('/SecondPage', { state: { propKey: propValue } });
     };
 
+    const fetchData = async () => {
+        console.log("ahdfnjm");
+        try {
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const response = await axios.get(baseURL + '/admin/penalties', {
+                headers: headers
+            });
+            console.log("responseee", response);
+            console.log(response?.data?.data?.id, "response");
+            setCommision(response?.data?.data?.commission);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     return (
         <>
             <section id="main-bg">
                 <div id="home-container" className="container mx-0">
                     <div className="row mb-5">
                         <div className="col-12 bg-orange text-center m-0">
-                            Commission: 5% ◉ For All Games
+                            Commission: {commision}% ◉ For All Games
                         </div>
                         <div className="col-12">
                             <HeaderComponent />

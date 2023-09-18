@@ -96,6 +96,30 @@ function HistoryPage() {
                                     </div>
                                 </div>
                             ))}
+                            {/* {selectedTransactionData?.map(item => (
+                                <div key={item?.id} className="col bg-light p-1 mb-2 d-flex">
+                                    <div className="row border-end mb-1 col-2">
+                                        <img src='./images/img.jpg' className="rounded-circle" style={{ width: '20%' }} alt="" />
+                                        <p>09 sep</p>
+                                        <p>date</p>
+                                    </div>
+                                    <div className="col-8">
+                                        <div className="col">
+                                            <h6 style={{ textTransform: "capitalize" }} className="mb-0"><strong>{item?.message}</strong></h6>
+                                            <div className="col-12 d-flex justify-content-between">
+                                                <h6 style={{ textTransform: "capitalize" }} className="mb-0 "><strong>{item?.Sender?.username}</strong></h6>
+                                                <h6 style={{ textTransform: "capitalize" }} className="mb-0"><strong>{item?.Receiver?.username}</strong></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row mb-3 col-2">
+                                        <h6 style={{ textTransform: "capitalize" }} className={`mb-0 text-end ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
+                                            ({item?.sender === accessUserId ? '-' : '+'}){item?.amount}
+                                        </h6>
+                                    </div>
+                                </div>
+                            ))} */}
+
                         </div>
                         <div className="col-12 d-flex justify-content-center my-3">
                             <button

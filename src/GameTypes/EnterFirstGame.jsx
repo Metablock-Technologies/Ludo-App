@@ -23,7 +23,7 @@ function EnterFirstGame() {
     const challengeID = location.state.id;
 
 
-    const [victory, setVictory] = useState(true);
+    const [victory, setVictory] = useState(false);
     const [screenshot, setScreenshot] = useState(null);
     // const [imageUrl, setImageUrl] = useState(null); // State to hold the image URL
 
@@ -38,34 +38,35 @@ function EnterFirstGame() {
 
     const handleRequestClick = async () => {
         setMessage('')
-        if (screenshot) {
-            try {
-                console.log(challengerid);
-                const formData = new FormData();
-                formData.append('file', screenshot);
-                // formData.append('amount', challengerid);
-                formData.append('victory', victory);
-                formData.append('challengeId', challengeID);
+        // if (screenshot) {
+        try {
+            console.log(challengerid);
+            const formData = new FormData();
+            formData.append('file', screenshot);
+            // formData.append('amount', challengerid);
+            formData.append('victory', victory);
+            formData.append('challengeId', challengeID);
 
-                const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
-                // const accessToken = token;
-                // console.log(accessToken);
-                const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            // const accessToken = token;
+            // console.log(accessToken);
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-                // Make API request using axios
-                const responsePromise = axios.post(baseURL + '/challenge/result', formData, {
-                    headers: headers
-                })
-                console.log(responsePromise);
-                responsePromise.then(response => {
-                    console.log('API response data:', response.data);
-                    setMessage("sent request successfully");
-                });
-            } catch (error) {
-                console.error(error);
-                setMessage(error?.response?.data?.message);
-            }
+            // Make API request using axios
+            const responsePromise = axios.post(baseURL + '/challenge/result', formData, {
+                headers: headers
+            })
+            console.log(responsePromise);
+            responsePromise.then(response => {
+                console.log('API response data:', response.data);
+                setMessage("sent request successfully");
+            });
+            navigate('/PlayPage')
+        } catch (error) {
+            console.error(error);
+            setMessage(error?.response?.data?.message);
         }
+        // }
     };
 
     // const handleRequestClick = async () => {
@@ -330,9 +331,11 @@ function EnterFirstGame() {
                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setMessage("") }} />
                                         </div>
                                         <div className="modal-body">
-                                            <a className="text-center row my-2 mx-auto text-decoration-none">
+                                            {victory == "true" ? <a className="text-center row my-2 mx-auto text-decoration-none">
                                                 <input className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center" type="file" accept="image/*" onChange={handleScreenshotChange} />
-                                            </a>
+                                            </a> :
+                                                <p>Are you sure, Do you want to confirm?</p>
+                                            }
                                             <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleRequestClick}>
                                                 <button className="col-12 btn  my-auto btn-success">Post Result</button>
                                             </a>
@@ -353,10 +356,8 @@ function EnterFirstGame() {
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
                         <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
-
                 </div >
             </section>
-
         </>
     )
 }

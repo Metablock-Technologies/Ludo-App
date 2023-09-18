@@ -94,7 +94,20 @@ function ProfilePage() {
     }
     const handleLogout = async () => {
         // logout();
-        localStorage.removeItem('access_token');
+        const removalPromises = [
+            new Promise((resolve) => {
+                localStorage.removeItem('access_token');
+                setTimeout(resolve, 0);
+            }),
+            new Promise((resolve) => {
+                localStorage.removeItem('access_token_expiration');
+                setTimeout(resolve, 0);
+            }),
+        ];
+
+        await Promise.all(removalPromises);
+        localStorage.clear();
+
         navigate('/LoginPage')
     }
     return (

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { baseURL } from './RegisterPage';
-import { AuthContext } from '../../App';
+// import { AuthContext } from '../../App';
 import { baseURL } from '../../token';
 
 
@@ -27,7 +27,7 @@ function SignUpPage() {
     // const phoneNumber = queryParams.get('phoneNumber') || '';
     // const email = queryParams.get('email') || '';
 
-    const { user, setUser } = useContext(AuthContext)
+    // const { user, setUser } = useContext(AuthContext)
 
     const handleSignUpClick = async () => {
         setMessage('');

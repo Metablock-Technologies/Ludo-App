@@ -28,7 +28,6 @@ function RegisterPage() {
 
     const navigate = useNavigate();
 
-
     const handleGetOtpClick = async () => {
         setMessage('');
         if (!name.trim()) {
@@ -44,14 +43,9 @@ function RegisterPage() {
             return;
         }
 
-        setIsOtpFieldsShown(true);
-        setShowOtpFields(true);
-        setIsVerifying(true);
-        startTimer();
-
         try {
             const queryParams = {
-                mode: isPhoneNumberVerified ? 'email' : "phone",
+                mode: "phone",
             };
             console.log("otpmode", queryParams.mode)
 
@@ -70,11 +64,14 @@ function RegisterPage() {
             console.log(response.data);
             console.log("name", response.name);
 
-            if (response.data) {
+            if (response.status == 200) {
+                startTimer();
+                setShowOtpFields(true);
                 setIsVerifying(true);
+                setIsOtpFieldsShown(true);
             }
         } catch (err) {
-            console.log(err);
+            console.log(err?.response?.data?.message);
             setMessage(err?.response?.data?.message);
         }
     };
@@ -83,7 +80,7 @@ function RegisterPage() {
         setMessage('');
         try {
             const queryParams = {
-                mode: isPhoneNumberVerified ? 'email' : "phone",
+                mode: "phone"
             }
             console.log("mode", queryParams.mode)
             const requestBody = {
@@ -101,34 +98,42 @@ function RegisterPage() {
             console.log("name", response);
 
             if (response.status === 200) {
+                // navigate(`/SignUpPage?name=${name}&phoneNumber=${phoneNumber}&email=${email}`);
+                const signupData = {
+                    name: name,
+                    phoneNumber: phoneNumber,
+                    email: email,
+                }
+                const emailparams = {
+                    mode: "email"
+                }
+                const emailotp = await axios.post(baseURL + '/user/otp', requestBody, {
+                    params: emailparams,
+                });
+                console.log("otp sent on email");
+                const emailverify = await axios.post(baseURL + '/user/verify', requestBody, {
+                    params: emailparams,
+                })
+                console.log("email otp verified");
                 setIsPhoneNumberVerified(true);
                 setShowEmailField(true);
                 setIsEmailVerified(true);
                 setIsVerifying(false);
                 setShowOtpFields(false);
                 setIsGetOtpDisabled(true);
-                setOtpInputs(['', '', '', '']);
-
-                if (response.status === 200 && isEmailVerified) {
-                    // navigate(`/SignUpPage?name=${name}&phoneNumber=${phoneNumber}&email=${email}`);
-                    const signupData = {
-                        name: name,
-                        phoneNumber: phoneNumber,
-                        email: email,
-                    }
-                    navigate(`/SignUpPage`, { state: signupData });
-                    localStorage.setItem('access_token', response.data.data.accessToken);
-                }
+                navigate(`/SignUpPage`, { state: signupData });
+                // localStorage.setItem('access_token', emailverify.data.data.accessToken);
+                const now = new Date();
+                const expirationDate = new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000); // 10 days from now
+                localStorage.setItem('access_token', emailverify?.data?.data?.accessToken);
+                localStorage.setItem('access_token_expiration', expirationDate.toISOString());
             }
         }
         catch (err) {
-            console.log(err);
+            console.log(err?.response?.data?.message);
             // Enable the Get OTP button
             setMessage(err?.response?.data?.message);
         }
-
-        // Add your logic for verifying the number here
-
     };
 
     // Handle timer expiry
@@ -236,19 +241,17 @@ function RegisterPage() {
                                                 onChange={(e) => setPhoneNumber(e.target.value)} />
                                         </div>
                                         <p style={{ color: 'red' }}>{phoneNumberError}</p>
-                                        {showEmailField && (
-                                            <div className="col-12 my-2">
-                                                <input
-                                                    type="text"
-                                                    placeholder="E-mail"
-
-
-                                                    onChange={(e) => {
-                                                        setEmail(e.target.value)
-                                                    }}
-                                                />
-                                            </div>
-                                        )}
+                                        {/* {showEmailField && ( */}
+                                        <div className="col-12 my-2">
+                                            <input
+                                                type="text"
+                                                placeholder="E-mail"
+                                                onChange={(e) => {
+                                                    setEmail(e.target.value)
+                                                }}
+                                            />
+                                        </div>
+                                        {/* )} */}
                                         <div className="col-12 my-2">
                                             <input
                                                 type="text"
@@ -331,7 +334,8 @@ function RegisterPage() {
                                                     <button className="bg-orange btn" onClick={() => {
                                                         handleVerifyNumberClick()
                                                     }}>
-                                                        {isEmailVerified ? "Verify Email" : "Verify Number"}
+                                                        {/* {isEmailVerified ? "Verify Email" : "Verify Number"} */}
+                                                        Verify Number
                                                     </button>
                                                 </>
                                             ) : (

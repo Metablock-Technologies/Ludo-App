@@ -30,14 +30,32 @@ function PrivateRoute({ element }) {
     const navigate = useNavigate();
     // Check for the presence of the access token
     const hasAccessToken = localStorage.getItem('access_token');
+    // console.log(hasAccessToken, "hassacces");
+    // useEffect(() => {
+    // Redirect to login if not logged in and no access token
 
-    useEffect(() => {
-        // Redirect to login if not logged in and no access token
-        if (!hasAccessToken) {
-            navigate('/LoginPage');
-        }
-    }, []);
+    //     if (!hasAccessToken) {
+    //         navigate('/LoginPage');
+    //     }
+    // }, []);
     return hasAccessToken ? element : <Navigate to="/LoginPage" />;
+}
+function isAuthenticated() {
+    const storedAccessToken = localStorage.getItem('access_token');
+    const expirationDate = new Date(localStorage.getItem('access_token_expiration'));
+    const date = new Date();
+
+    console.log(date);
+    console.log(expirationDate > date);
+    if (storedAccessToken && expirationDate > date) {
+        // The access token is valid
+        // Use `storedAccessToken` for your API requests
+        return true;
+    } else {
+        // The access token has expired or doesn't exist
+        // You may need to handle token refresh or reauthentication here
+        return false;
+    }
 }
 
 
@@ -53,10 +71,10 @@ function App() {
             <AuthContext.Provider value={{ user, setUser }}>
                 <HashRouter>
                     <Routes>
-                        <Route exact path='/' element={<MainPage />}></Route>
-                        <Route exact path='/RegisterPage' element={<RegisterPage />}></Route>
-                        <Route exact path="/RegisterLegalPage" element={<RegisterLegalPage />}></Route>
-                        <Route exact path='/LoginPage' element={<LoginPage />}></Route>
+                        <Route exact path='/' element={<PrivateRoute element={isAuthenticated() ? <Navigate to="/UserPage" /> : <MainPage />} />}></Route>
+                        <Route exact path='/RegisterPage' element={isAuthenticated() ? <Navigate to="/UserPage" /> : <RegisterPage />}></Route>
+                        <Route exact path="/RegisterLegalPage" element={isAuthenticated() ? <Navigate to="/UserPage" /> : <RegisterLegalPage />}></Route>
+                        <Route exact path='/LoginPage' element={isAuthenticated() ? <Navigate to="/UserPage" /> : <LoginPage />}></Route>
 
                         <Route exact path='/forgetPassword' element={<ForgetEmail />}></Route>
                         <Route exact path='/getForgetOtp' element={<GetForgetOtp />}></Route>

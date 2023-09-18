@@ -70,7 +70,11 @@ function LoginPage() {
         try {
             const response = await axios.post(baseURL + '/user/login', body)
             console.log(response.data.data.token)
-            localStorage.setItem('access_token', response.data.data.token);
+            // localStorage.setItem('access_token', response.data.data.token);
+            const now = new Date();
+            const expirationDate = new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000); // 10 days from now
+            localStorage.setItem('access_token', response?.data?.data?.token);
+            localStorage.setItem('access_token_expiration', expirationDate.toISOString());
             if (response.status === 200) {
                 navigate('/UserPage')
             }
