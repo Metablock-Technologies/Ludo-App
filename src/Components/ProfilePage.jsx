@@ -92,24 +92,61 @@ function ProfilePage() {
             console.log(error);
         }
     }
-    const handleLogout = async () => {
-        // logout();
-        const removalPromises = [
-            new Promise((resolve) => {
+
+    const removeAccessToken = () => {
+        return new Promise((resolve, reject) => {
+            try {
                 localStorage.removeItem('access_token');
-                setTimeout(resolve, 0);
-            }),
-            new Promise((resolve) => {
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        });
+    };
+
+    const removeExpirationToken = () => {
+        return new Promise((resolve, reject) => {
+            try {
                 localStorage.removeItem('access_token_expiration');
-                setTimeout(resolve, 0);
-            }),
-        ];
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        });
+    };
 
-        await Promise.all(removalPromises);
-        localStorage.clear();
+    const handleLogout = () => {
+        removeAccessToken()
+            .then(() => {
+                return removeExpirationToken();
+            })
+            .then(() => {
+                navigate('/LoginPage');
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+    };
 
-        navigate('/LoginPage')
-    }
+    // const handleLogout = async () => {
+    //     const removalPromises = [
+    //         new Promise((resolve) => {
+    //             localStorage.removeItem('access_token');
+    //             // localStorage.clear();
+    //             setTimeout(resolve, 0);
+    //         }),
+    //         new Promise((resolve) => {
+    //             localStorage.removeItem('access_token_expiration');
+    //             // localStorage.clear();
+    //             setTimeout(resolve, 0);
+    //         }),
+    //     ];
+    //     await Promise.all(removalPromises);
+
+    //     // await localStorage.removeItem('access_token');
+
+    //     navigate('/LoginPage')
+    // }
     return (
         <>
             <section id="main-bg">
@@ -261,7 +298,7 @@ function ProfilePage() {
                                 </div>
                             </div>
                         </div>
-                        <a href="#" className="text-center my-2 row mt-2 mx-auto text-decoration-none" onClick={handleLogout}>
+                        <a className="text-center my-2 row mt-2 mx-auto text-decoration-none" onClick={handleLogout}>
                             <button className="col-12 btn rounded btn-danger px-2">Logout</button>
                         </a>
                     </div>

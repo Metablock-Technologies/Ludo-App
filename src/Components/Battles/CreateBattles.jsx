@@ -74,9 +74,9 @@ function CreateBattles({ fetchData, battletype }) {
                 </div>
                 <div className='d-flex' >
                     {battletype === "quick" ? (
-                        <p className="mb-0 ml-2 mr-auto  "> <strong>(50-500)</strong></p>
+                        <p className="mb-0 ml-2 mr-auto  "> <strong>(50-30000)</strong></p>
                     ) : (
-                        <p className="mb-0 ml-2 mr-auto"><strong>(500-20000)</strong></p>
+                        <p className="mb-0 ml-2 mr-auto"><strong>(500-30000)</strong></p>
                     )}
 
                 </div>

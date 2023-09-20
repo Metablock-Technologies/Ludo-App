@@ -49,16 +49,12 @@ const Runningbattles = ({ runningBattles }) => {
 
 
     useEffect(() => {
-        // Generate random battles every minute
         const intervalId = setInterval(() => {
-            const newBattles = generateRandomBattles(10); // Generate 10 random battles
+            const newBattles = generateRandomBattles(30);   //30 battles
             setFakebattles(newBattles);
-        }, 60000);
-
-        // Initial generation of random battles
-        const initialBattles = generateRandomBattles(10); // Generate 10 random battles
+        }, 30000);
+        const initialBattles = generateRandomBattles(30);
         setFakebattles(initialBattles);
-
         return () => clearInterval(intervalId);
     }, []);
 

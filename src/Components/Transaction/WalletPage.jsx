@@ -68,17 +68,17 @@ function WalletPage() {
                     <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
                         <div className="text-center">Deposit Chips</div>
                         <div className="card-body walletbody mt-2">
-                            <div className="card info-ludo col-12 text-center text-white p-3 mb-3">
+                            {/* <div className="card info-ludo col-12 text-center text-white p-3 mb-3">
                                 Deposit Chips Info
-                            </div>
-                            <div className="my-auto">
+                            </div> */}
+                            {/* <div className="my-auto">
                                 <div className="text-center">
                                     <h4>Chips</h4>
                                 </div>
                                 <div className="text-center">
                                     <h4>0.00</h4>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="col-12" onClick={() => navigate('/AddChipsPage')} >
 
                                 <button className="bg-orange btn">Add Chips</button>
@@ -89,17 +89,17 @@ function WalletPage() {
                     <div className="col-12 card my-2 walletcard pt-2 px-0 mx-auto text-white">
                         <div className="text-center">Winning Chips</div>
                         <div className="card-body walletbody mt-2">
-                            <div className="card info-ludo col-12 text-center text-white p-3 mb-3">
+                            {/* <div className="card info-ludo col-12 text-center text-white p-3 mb-3">
                                 Winning Chips Info
-                            </div>
-                            <div className="my-auto">
+                            </div> */}
+                            {/* <div className="my-auto">
                                 <div className="text-center">
                                     <h4>Chips</h4>
                                 </div>
                                 <div className="text-center">
                                     <h4>0.00</h4>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="col-12" onClick={() => navigate('/WithdrawPage')}>
 
                                 <button className="bg-orange btn">Withdraw</button>

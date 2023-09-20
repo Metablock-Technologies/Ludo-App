@@ -38,7 +38,6 @@ function EnterFirstGame() {
 
     const handleRequestClick = async () => {
         setMessage('')
-        // if (screenshot) {
         try {
             console.log(challengerid);
             const formData = new FormData();
@@ -66,7 +65,6 @@ function EnterFirstGame() {
             console.error(error);
             setMessage(error?.response?.data?.message);
         }
-        // }
     };
 
     // const handleRequestClick = async () => {
@@ -327,7 +325,9 @@ function EnterFirstGame() {
                                 <div className="modal-dialog  modal-dialog-centered">
                                     <div className="modal-content">
                                         <div className="modal-header">
-                                            <h1 className="modal-title fs-5" id="exampleModalLabel">Upload Result</h1>
+                                            {victory == "true" ?
+                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Upload Result</h1>
+                                                : <h1 className="modal-title fs-5" id="exampleModalLabel">Warning</h1>}
                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setMessage("") }} />
                                         </div>
                                         <div className="modal-body">
@@ -337,7 +337,7 @@ function EnterFirstGame() {
                                                 <p>Are you sure, Do you want to confirm?</p>
                                             }
                                             <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleRequestClick}>
-                                                <button className="col-12 btn  my-auto btn-success">Post Result</button>
+                                                <button className="col-12 btn  my-auto btn-success">Submit</button>
                                             </a>
                                             <p>{message}</p>
                                         </div>

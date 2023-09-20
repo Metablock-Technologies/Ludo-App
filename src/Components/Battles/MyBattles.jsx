@@ -36,11 +36,9 @@ const MyBattles = ({ runningBattles, judgement }) => {
     useEffect(() => {
         fetchdata();
 
-        // Set up a polling interval (e.g., every 5 seconds)
-        // const intervalId = setInterval(fetchdata, 5000);
+        const intervalId = setInterval(fetchdata, 5000);
 
-        // // Clean up the interval on component unmount
-        // return () => clearInterval(intervalId);
+        return () => clearInterval(intervalId);
     }, [])
 
     const challenges = [...runningBattles, ...judgement]
