@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import HeaderComponent from '../HeaderComponent';
 import { useNavigate, useNavigation } from 'react-router-dom';
+import axios from 'axios';
+import { baseURL } from '../../token';
 
 function getRandomUsername() {
     const usernameLength = Math.floor(Math.random() * 3) + 8; // Random username length between 8 and 10 characters
@@ -21,8 +23,6 @@ function getRandomPrice() {
     return price;
 }
 
-
-
 function generateRandomBattles(numBattles) {
     const battles = [];
     for (let i = 0; i < numBattles; i++) {
@@ -40,6 +40,7 @@ function generateRandomBattles(numBattles) {
 const Runningbattles = ({ runningBattles }) => {
     const [fakebattles, setFakebattles] = useState([]);
     const navigate = useNavigate();
+    const [commission, setCommission] = useState(0);
 
     const handleOpen = (chid, price, roomcode, id) => {
         console.log("heyy|", id, price, roomcode);
@@ -48,11 +49,28 @@ const Runningbattles = ({ runningBattles }) => {
     }
 
 
+    const fetchpenalty = async () => {
+        console.log("ahdfnjm");
+        try {
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const response = await axios.get(baseURL + '/user/penalties', {
+                headers: headers
+            });
+            console.log("responseee", response);
+            console.log(response?.data?.data?.id, "response");
+            setCommission(response?.data?.data?.commission);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     useEffect(() => {
+        fetchpenalty();
         const intervalId = setInterval(() => {
             const newBattles = generateRandomBattles(30);   //30 battles
             setFakebattles(newBattles);
-        }, 30000);
+        }, 5000);
         const initialBattles = generateRandomBattles(30);
         setFakebattles(initialBattles);
         return () => clearInterval(intervalId);
@@ -74,7 +92,7 @@ const Runningbattles = ({ runningBattles }) => {
                             </div>
                             <div className="col d-flex justify-content-end me-2">
                                 <p className="mb-0">Prize&nbsp;</p>
-                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((5 * battle.price * 2) / 100)}</h6>
+                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((commission * battle.price * 2) / 100)}</h6>
                             </div>
                         </div>
                         <div className="card-body walletbody mt-2">
@@ -108,7 +126,7 @@ const Runningbattles = ({ runningBattles }) => {
                             </div>
                             <div className="col d-flex justify-content-end me-2">
                                 <p className="mb-0">Prize&nbsp;</p>
-                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((5 * battle.price * 2) / 100)}</h6>
+                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((commission * battle.price * 2) / 100)}</h6>
                             </div>
                         </div>
                         <div className="card-body walletbody mt-2">

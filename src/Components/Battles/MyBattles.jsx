@@ -6,38 +6,56 @@ import { useState } from 'react';
 import { baseURL } from '../../token';
 import axios from 'axios';
 
-const MyBattles = ({ runningBattles, judgement }) => {
-
+const MyBattles = ({ runningBattles, judgement, propvalue }) => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
+    const [commission, setCommission] = useState(0);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleOpen = (chid, price, roomcode, id) => {
         console.log("heyy|", id, price, roomcode);
         <HeaderComponent />
-        navigate('/EnterFirstGame', { state: { challengeruserid: chid, priceplay: price, roomcode: roomcode, type: "runningbattle", id: id } });
+        console.log(propvalue);
+        navigate('/EnterFirstGame', { state: { propvalue: propvalue, challengeruserid: chid, priceplay: price, roomcode: roomcode, type: "runningbattle", id: id } });
     }
-
 
     const fetchdata = async () => {
         try {
-
+            // setIsLoading(true);
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
             const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
             const response = await axios.get(baseURL + '/user', {
                 headers: headers
             })
+            fetchpenalty();
             console.log(response.data);
             setId(response?.data?.data?.id);
-
+            // setIsLoading(false);
         } catch (error) {
             console.log(error);
+            // setIsLoading(false);
         }
     }
+    const fetchpenalty = async () => {
+        console.log("ahdfnjm");
+        try {
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const response = await axios.get(baseURL + '/user/penalties', {
+                headers: headers
+            });
+            console.log("responseee", response);
+            console.log(response?.data?.data?.id, "response");
+            setCommission(response?.data?.data?.commission);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     useEffect(() => {
         fetchdata();
-
+        fetchpenalty();
         const intervalId = setInterval(fetchdata, 5000);
-
         return () => clearInterval(intervalId);
     }, [])
 
@@ -52,7 +70,6 @@ const MyBattles = ({ runningBattles, judgement }) => {
         const isRunning = battle.status === 'running';
         const challengerResponded = battle.result.challenger_responded;
         const acceptorResponded = battle.result.acceptor_responded;
-
         let user = '';
 
         if (isChallenger && challengerResponded) {
@@ -98,6 +115,7 @@ const MyBattles = ({ runningBattles, judgement }) => {
                     <h6 className="mb-0"><i className="bi bi-x-circle-fill text-danger" /> My Battles</h6>
                 </div>
             </div>
+            {/* {isLoading && <p>Loading...</p>} */}
             <div className='scroll-container'>
                 {filteredChallenges.map((battle, index) => (
                     <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white" key={index}>
@@ -107,7 +125,7 @@ const MyBattles = ({ runningBattles, judgement }) => {
                             </div>
                             <div className="col d-flex justify-content-end me-2">
                                 <p className="mb-0">Prize&nbsp;</p>
-                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((5 * battle.price * 2) / 100)}</h6>
+                                <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((commission * battle.price * 2) / 100)}</h6>
                             </div>
                         </div>
                         <div className="card-body walletbody mt-2">

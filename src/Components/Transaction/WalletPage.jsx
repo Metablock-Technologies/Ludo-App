@@ -15,6 +15,30 @@ function WalletPage() {
                     <div className="col-12">
                         <HeaderComponent />
                     </div>
+                    <div className="col-12 my-3">
+                        <div className="row align-items-center my-2">
+                            <div className="my-auto col-6 text-white" onClick={() => navigate('/UserPage')}>
+                                <button type="button" className="btn btn-primary d-flex "><span className="material-symbols-outlined mb-0">arrow_back</span>Back</button>
+                            </div>
+                            <div className="col-6 d-flex justify-content-end">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="guide-btn" className="btn btn-outline-primary bg-light">Guide</button>
+                                {/* Modal */}
+                                <div className="modal fade" id="exampleModal2" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Guide Vedio</h1>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                                            </div>
+                                            <div className="modal-body">
+                                                <iframe width="100%" height="350px" src="https://www.youtube.com/embed/38y_1EWIE9I" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="col-12" style={{ display: 'inline' }}>
                         {/* Modal */}
                         <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -71,7 +71,8 @@ function App() {
             <AuthContext.Provider value={{ user, setUser }}>
                 <HashRouter>
                     <Routes>
-                        <Route exact path='/' element={<PrivateRoute element={isAuthenticated() ? <Navigate to="/UserPage" /> : <MainPage />} />}></Route>
+                        <Route exact path='/' element={<PrivateRoute element={<MainPage />} />}></Route>
+                        {/* <Route exact path='/' element={<PrivateRoute element={isAuthenticated() ? <Navigate to="/UserPage" /> : <MainPage />} />}></Route> */}
                         <Route exact path='/RegisterPage' element={isAuthenticated() ? <Navigate to="/UserPage" /> : <RegisterPage />}></Route>
                         <Route exact path="/RegisterLegalPage" element={isAuthenticated() ? <Navigate to="/UserPage" /> : <RegisterLegalPage />}></Route>
                         <Route exact path='/LoginPage' element={isAuthenticated() ? <Navigate to="/UserPage" /> : <LoginPage />}></Route>

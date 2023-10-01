@@ -7,10 +7,18 @@ function CreateBattles({ fetchData, battletype }) {
     const [createBattles, setCreateBattles] = useState([]);
     const [messageError, setMessageError] = useState('');
     const [roomcode, setRoomcode] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     // console.log(createBattles);
     const handlecreate = async () => {
         setMessageError('');
+        let roundedAmount = createBattles;
+        if (roundedAmount % 50 != 0) {
+            setMessageError("Please enter valid amount, amount should be multiple of 50");
+            return
+            // const roundedValue = Math.round(createBattles / 50);
+            // roundedAmount = roundedValue * 50;
+        }
         try {
             // if (battletype == 'quick') {
             //     if (createBattles > 500) {
@@ -28,11 +36,13 @@ function CreateBattles({ fetchData, battletype }) {
             //         setMessageError("you cannot create battle less than 500 in rich mode. Go to quick mode to play game less than 500. ")
             //     }
             // }
-            let roundedAmount = createBattles;
-            if (roundedAmount % 50 != 0) {
-                const roundedValue = Math.round(createBattles / 50);
-                roundedAmount = roundedValue * 50;
-            }
+
+            // let roundedAmount = createBattles;
+            // if (roundedAmount % 50 != 0) {
+            //     const roundedValue = Math.round(createBattles / 50);
+            //     roundedAmount = roundedValue * 50;
+            // }
+            setIsLoading(true);
             const requestbody = {
                 category: battletype,
                 price: roundedAmount,
@@ -50,6 +60,7 @@ function CreateBattles({ fetchData, battletype }) {
 
             if (response.data) {
                 < HeaderComponent />
+                setIsLoading(false);
                 setMessageError("battle created successfully");
                 setCreateBattles('');
                 setRoomcode('');
@@ -61,6 +72,7 @@ function CreateBattles({ fetchData, battletype }) {
             setMessageError(error?.response?.data?.message)
             fetchData()
             console.error("error", error);
+            setIsLoading(false);
         }
     };
 
@@ -106,7 +118,8 @@ function CreateBattles({ fetchData, battletype }) {
                         </div>
                     </div>
                     <p>{messageError}</p>
-                    <button className="bg-orange-create-battles-button btn " onClick={handlecreate}>
+                    {isLoading && <p>Loading...</p>}
+                    <button className="bg-orange-create-battles-button btn " disabled={isLoading} onClick={handlecreate}>
                         Create
                     </button>
                 </div>

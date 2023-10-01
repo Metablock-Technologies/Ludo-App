@@ -24,7 +24,7 @@ function SecondPage() {
     // const [sliderValue, setSliderValue] = useState(500)
     const location = useLocation();
     const propValue = location.state.propKey;
-    // console.log(propValue);
+    console.log("ajdadsjjjjjjjjjj", propValue);
     // const handleSliderChange = (event) => {
     //     const newValue = parseInt(event.target.value);
     //     setSliderValue(newValue);
@@ -130,7 +130,7 @@ function SecondPage() {
                             <CreateBattles fetchData={fetchData} battletype={propValue} />
                         </div>
                         <div className="col-12 my-2 bg-purple2 py-3">
-                            <MyBattles runningBattles={runningBattles} judgement={judgement} />
+                            <MyBattles runningBattles={runningBattles} judgement={judgement} propvalue={propValue} />
                         </div>
                         <div className="col-12 my-2 bg-purple2 py-3">
                             <Openbattles openBattles={openBattles} fetchData={fetchData} />

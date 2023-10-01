@@ -13,6 +13,7 @@ function EnterFirstGame() {
     const [acceptoruser, setAcceptorUser] = useState('');
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     // const navigate = useNavigate();
 
     const location = useLocation();
@@ -21,6 +22,7 @@ function EnterFirstGame() {
     const challengerid = location.state.challengeruserid;
     const type = location.state.type;
     const challengeID = location.state.id;
+    const propvalue = location.state.propvalue;
 
 
     const [victory, setVictory] = useState(false);
@@ -38,7 +40,16 @@ function EnterFirstGame() {
 
     const handleRequestClick = async () => {
         setMessage('')
+        console.log(victory, screenshot);
+        if (victory == "true") {
+            if (!screenshot) {
+                setMessage("please choose image");
+                setIsLoading(false);
+                return;
+            }
+        }
         try {
+            setIsLoading(true);
             console.log(challengerid);
             const formData = new FormData();
             formData.append('file', screenshot);
@@ -60,10 +71,12 @@ function EnterFirstGame() {
                 console.log('API response data:', response.data);
                 setMessage("sent request successfully");
             });
+            setIsLoading(false);
             navigate('/PlayPage')
         } catch (error) {
             console.error(error);
             setMessage(error?.response?.data?.message);
+            setIsLoading(false);
         }
     };
 
@@ -106,7 +119,8 @@ function EnterFirstGame() {
 
     const handleBackbtn = () => {
         setMessage('')
-        navigate(-1)
+        // navigate(-1)
+        navigate("/SecondPage", { state: { propKey: propvalue } })
         // console.log("heyy");
         // console.log(navigate);
     }
@@ -123,7 +137,7 @@ function EnterFirstGame() {
             const response = await axios.get(`${baseURL}/user`, {
                 headers: headers
             });
-            // console.log("acceptor", response.data.data.username);
+            console.log("acceptor", response.data.data);
             setAcceptorUser(response.data.data.username);
 
             const reseponsechallenger = await axios.get(`${baseURL}/user/${challengerid}`, {
@@ -331,15 +345,24 @@ function EnterFirstGame() {
                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setMessage("") }} />
                                         </div>
                                         <div className="modal-body">
-                                            {victory == "true" ? <a className="text-center row my-2 mx-auto text-decoration-none">
-                                                <input className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center" type="file" accept="image/*" onChange={handleScreenshotChange} />
-                                            </a> :
+                                            {victory == "true" ?
+                                                <a className="text-center row my-2 mx-auto text-decoration-none">
+                                                    <input className="col-12 btn rounded btn-primary my-auto d-flex justify-content-center" type="file" accept="image/*" onChange={handleScreenshotChange} />
+                                                </a>
+                                                :
                                                 <p>Are you sure, Do you want to confirm?</p>
                                             }
-                                            <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleRequestClick}>
-                                                <button className="col-12 btn  my-auto btn-success">Submit</button>
-                                            </a>
+                                            {isLoading && <p>Loading...</p>}
                                             <p>{message}</p>
+                                            {message ?
+                                                <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleRequestClick}>
+                                                    <button disabled={isLoading} className="col-12 btn  my-auto btn-success">Submit</button>
+                                                </a>
+                                                :
+                                                <a className="text-center row my-2 mx-auto text-decoration-none" onClick={handleRequestClick}>
+                                                    <button disabled={isLoading} data-bs-dismiss="modal" className="col-12 btn  my-auto btn-success">Submit</button>
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>

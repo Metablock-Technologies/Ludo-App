@@ -21,7 +21,7 @@ function PlayPage() {
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
             const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-            const response = await axios.get(baseURL + '/admin/penalties', {
+            const response = await axios.get(baseURL + '/user/penalties', {
                 headers: headers
             });
             console.log("responseee", response);
@@ -89,12 +89,13 @@ function PlayPage() {
                             <div className="row">
                                 <div className="col-6 " style={{ cursor: 'pointer' }}>
                                     <div className="card gamecard card-body" onClick={() => navigateToComponent('quick')}>
-                                        <img src="./images/WhatsApp35.jpg" alt />
+                                        <img src="./images/classic.jpeg" alt />
                                     </div>
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
                                     <div className="card gamecard card-body" onClick={() => navigateToComponent('rich')}>
-                                        <img src="./images/WhatsApp.44.jpg" alt />
+                                        <img src="./images/snakemode.jpeg" alt />
+                                        {/* <img style={{ height: "13.2em" }} src="./images/snakemode.jpeg" alt /> */}
                                     </div>
                                 </div>
                                 <div className="col-6" style={{ opacity: '50%', cursor: "not-allowed" }}>

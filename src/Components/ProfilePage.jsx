@@ -121,7 +121,7 @@ function ProfilePage() {
                 return removeExpirationToken();
             })
             .then(() => {
-                navigate('/LoginPage');
+                navigate('/');
             })
             .catch(error => {
                 console.error('An error occurred:', error);
@@ -171,7 +171,7 @@ function ProfilePage() {
                                         <input style={{ textTransform: "capitalize" }} type="text" className="col-9 text-left d-flex details-1 " defaultValue="name" value={name}
                                             onChange={(e) => { setName(e.target.value) }}
                                             disabled={enable} />
-                                        <a href="#" className="col-3 mx-1 d-flex justify-content-end text-decoration-none">
+                                        <a className="col-3 mx-1 d-flex justify-content-end text-decoration-none">
                                             {enable ?
                                                 (<button className="bg-orange btn" onClick={handleEdit}>Edit</button>) :
                                                 (<>

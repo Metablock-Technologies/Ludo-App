@@ -10,6 +10,7 @@ function WithDrawPage() {
     const [confirmUpiId, setConfirmUpiId] = useState('');
     const [chipAmount, setChipAmount] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async () => {
         setErrorMessage('');
@@ -27,6 +28,7 @@ function WithDrawPage() {
         }
 
         try {
+            setIsLoading(true);
             const reqbody = {
                 amount: chipAmount,
                 details: upiId
@@ -48,9 +50,11 @@ function WithDrawPage() {
                 const errorData = await response.json();
                 setErrorMessage(errorData.message);
             }
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
             setErrorMessage(error?.response?.data?.message);
+            setIsLoading(false);
         }
     };
 
@@ -99,7 +103,7 @@ function WithDrawPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
+                        {/* <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="text-center">Payment Mode</div>
                             <div className="card-body walletbody mt-2">
                                 <div className="col-12 py-3 ">
@@ -110,7 +114,7 @@ function WithDrawPage() {
                                     <p className="text-light text-end">Maximum:1,00,000</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="text-center">Payment Details</div>
                             <div className="card-body walletbody mt-2">
@@ -140,9 +144,11 @@ function WithDrawPage() {
                                 {errorMessage && (
                                     <div className="col-12 text-danger text-center mt-3">{errorMessage}</div>
                                 )}
+                                {isLoading && <p>Loading...</p>}
                                 <div className="col-12">
-                                    <button onClick={handleSubmit} className="bg-orange btn">Submit</button>
+                                    <button onClick={handleSubmit} disabled={isLoading} className="bg-orange btn">Submit</button>
                                 </div>
+
                             </div>
                         </div>
                     </div>

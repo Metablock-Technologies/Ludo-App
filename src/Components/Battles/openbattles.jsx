@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { baseURL, token } from '../../token';
 import axios from 'axios';
@@ -8,11 +8,14 @@ import HeaderComponent from '../HeaderComponent';
 const Openbattles = ({ openBattles, fetchData }) => {
     const navigate = useNavigate();
     const [messageError, setMessageError] = useState('');
+    const [commission, setCommision] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleplaybtn = async (id, price, roomcode, challengeid) => {
         setMessageError('');
         try {
             // navigate('/EnterFirstGame')
+            setIsLoading(true);
             console.log(id);
             const requestbody = {
                 challengeId: id
@@ -27,6 +30,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
             fetchData();
             setMessageError('')
             console.log(response);
+            setIsLoading(false);
             if (response) {
                 <HeaderComponent />
                 navigate('/EnterFirstGame', { state: { challengeruserid: challengeid, priceplay: price, roomcode: roomcode, type: "openbattle" } });
@@ -34,12 +38,14 @@ const Openbattles = ({ openBattles, fetchData }) => {
         } catch (error) {
             setMessageError(error?.response?.data?.message);
             console.error("error:--", error?.response?.data?.message);
+            setIsLoading(false);
         }
     }
     const handlecancelbtn = async (id) => {
         setMessageError('');
         try {
             console.log(id);
+            setIsLoading(true);
             const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
             // console.log(accessToken);
             const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
@@ -49,15 +55,36 @@ const Openbattles = ({ openBattles, fetchData }) => {
             });
             fetchData();
             console.log(response);
+            setIsLoading(false);
             // if (response) {
             //     navigate('EnterFirstGame')
             // }
         } catch (error) {
             setMessageError(error?.response?.data?.message);
             console.error("error:--", error);
+            setIsLoading(false);
         }
     }
 
+    const fetchpenalty = async () => {
+        console.log("ahdfnjm");
+        try {
+            const accessToken = localStorage.getItem('access_token'); // Retrieve access token from localStorage
+            const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+            const response = await axios.get(baseURL + '/user/penalties', {
+                headers: headers
+            });
+            console.log("responseee", response);
+            console.log(response?.data?.data?.id, "response");
+            setCommision(response?.data?.data?.commission);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchpenalty();
+    }, [])
     return (
         <div className="row">
             <div className="col-12  mb-3 d-flex justify-content-between text-light">
@@ -82,6 +109,7 @@ const Openbattles = ({ openBattles, fetchData }) => {
                         </div>
                         <div className="card-body walletbody mt-2">
                             <div className="row">
+                                {isLoading && <p>Loading...</p>}
                                 <div className="col-12 d-flex justify-content-between">
                                     <div className="d-flex">
                                         <div className="me-2">
@@ -90,15 +118,15 @@ const Openbattles = ({ openBattles, fetchData }) => {
                                         </div>
                                         <div className="ms-2">
                                             <p className="mb-0" id="win-time">Prize</p>
-                                            <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((5 * battle.price * 2) / 100)}</h6>
+                                            <h6 className="mb-0 d-flex"><span className="material-symbols-outlined text-success">payments</span> {(battle.price * 2) - ((commission * battle.price * 2) / 100)}</h6>
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="btn bg-orange" onClick={() => handleplaybtn(battle.id, battle.price, battle.roomcode, battle.challenger)} >Play</button>
+                                        <button className="btn bg-orange" onClick={() => handleplaybtn(battle.id, battle.price, battle.roomcode, battle.challenger)} disabled={isLoading} >Play</button>
                                         {/* <button className="btn bg-orange" onClick={handlePlaybtn}>Play</button> */}
                                     </div>
                                     <div>
-                                        <button className="btn bg-orange" onClick={() => handlecancelbtn(battle.id)} >Cancel</button>
+                                        <button className="btn bg-orange" disabled={isLoading} onClick={() => handlecancelbtn(battle.id)} >Cancel</button>
                                         {/* <button className="btn bg-orange" onClick={handlePlaybtn}>Play</button> */}
                                     </div>
                                 </div>

@@ -46,11 +46,11 @@ function SignUpPage() {
                 headers: headers
             }
             )
-            setUser({
-                name: name,
-                memberType: response.data.data.user.role,
-                userID: response.data.data.user.id
-            })
+            // setUser({
+            //     name: name,
+            //     memberType: response.data.data.user.role,
+            //     userID: response.data.data.user.id
+            // })
             console.log(response)
 
             if (response.status === 201) {

@@ -175,13 +175,16 @@ function HistoryPage() {
                                                         <div className="col-7">
                                                             <p className="mb-0"><strong>Receiver:</strong> {item?.Receiver?.username}</p>
                                                         </div>
+                                                        {/* <div className="col-7">
+                                                            <p className="mb-0"><strong>Clos:</strong> {item?.message}</p>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                                 <div className="col-2 border-start d-flex flex-column align-items-center ">
                                                     <h5 className={`mb-0 ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
                                                         {item?.sender === accessUserId ? '-' : '+'}{item?.amount}
                                                     </h5>
-                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Amount:- </strong>{amount}</h5>
+                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "13px" }}><strong>closing balance:- </strong>{item?.closingbalance ? item?.closingbalance : "0"}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -246,7 +249,7 @@ function HistoryPage() {
                                                 <div className="col-8 d-flex flex-column justify-content-center">
                                                     <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Status:- </strong>{item?.status}</h5>
                                                     <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Roomcode:- </strong>{item?.roomcode}</h5>
-                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Category:- </strong>{item?.category}</h5>
+                                                    {/* <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Category:- </strong>{item?.category}</h5> */}
 
                                                 </div>
                                                 <div className="col-2 border-start d-flex flex-column align-items-center justify-content-center">

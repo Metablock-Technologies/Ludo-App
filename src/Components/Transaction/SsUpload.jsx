@@ -7,6 +7,7 @@ const ScreenshotUpload = ({ amount }) => {
     const [screenshot, setScreenshot] = useState(null);
     const [showRequestButton, setShowRequestButton] = useState(false);
     const [messageError, setMessageError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     // const [imageUrl, setImageUrl] = useState(null); // State to hold the image URL
 
     const handleScreenshotChange = (e) => {
@@ -22,6 +23,7 @@ const ScreenshotUpload = ({ amount }) => {
         setMessageError('');
         if (screenshot && amount > 0) {
             try {
+                setIsLoading(true);
                 const formData = new FormData();
                 formData.append('file', screenshot);
                 formData.append('amount', amount);
@@ -38,10 +40,16 @@ const ScreenshotUpload = ({ amount }) => {
                 responsePromise.then(response => {
                     console.log('API response data:', response.data.data);
                     setMessageError("sent request successfully");
+                }).catch(error => {
+                    console.error(error);
+                    setMessageError(error?.response?.data?.message);
+                }).finally(() => {
+                    setIsLoading(false);
                 });
             } catch (error) {
                 console.error(error);
                 setMessageError(error?.response?.data?.message);
+                setIsLoading(false);
             }
         }
     };
@@ -76,15 +84,16 @@ const ScreenshotUpload = ({ amount }) => {
         <div>
             {/* <input style={{ margin: "auto", display: "flex", justifyContent: "center", marginTop: "20px" }} type="file" accept="image/*" onChange={handleScreenshotChange} /> */}
             <div class="input-group mb-3 mt-3" onChange={handleScreenshotChange} >
-                <input type="file" class="form-control" id="inputGroupFile02" accept="image/*" />
                 <div className="col-12 my-1">
-                    <label htmlFor="username" className="text-left text-yellow" >Re Enter UPI ID</label>
+                    <label htmlFor="username" className="text-left text-yellow" >UPI ID</label>
                 </div>
-                <div className="col-12 mb-4">
-                    <input type="text" className="details" placeholder="1234567890@paytm" />
+                <div className="col-12 mb-4" disabled>
+                    <input type="text" className="details" value={"63788948750@paytm"} placeholder="63788948750@paytm" disabled />
                 </div>
+                <input type="file" class="form-control" id="inputGroupFile02" accept="image/*" />
             </div>
-            {showRequestButton && <button onClick={handleRequestClick} className='btn bg-orange'>Send Request</button>}
+            {showRequestButton && <button onClick={handleRequestClick} className='btn bg-orange' disabled={isLoading}>Send Request</button>}
+            {isLoading && <p>Loading...</p>}
             <p>{messageError}</p>
             {/* Display the image */}
             {/* {imageUrl && <img src={imageUrl} alt="Uploaded Screenshot" />} */}
