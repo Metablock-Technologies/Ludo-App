@@ -94,7 +94,7 @@ function PlayPage() {
                                 </div>
                                 <div className="col-6" style={{ cursor: 'pointer' }}>
                                     <div className="card gamecard card-body" onClick={() => navigateToComponent('rich')}>
-                                        <img src="./images/snakemode.jpeg" alt />
+                                        <img src="./images/snakemode.jpeg" alt height="200px" />
                                         {/* <img style={{ height: "13.2em" }} src="./images/snakemode.jpeg" alt /> */}
                                     </div>
                                 </div>

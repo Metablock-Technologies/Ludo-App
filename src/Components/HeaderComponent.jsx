@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { baseURL } from '../token';
 import axios from 'axios';
-import Logo from './Logo';
+import logo from '../styles/logo.jpg'
 
 function HeaderComponent() {
     const [amount, setAmount] = useState(0);
@@ -39,7 +39,8 @@ function HeaderComponent() {
                 </div>
                 <div className="col-3" style={{ width: '90px', borderRadius: '50%', cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}>
                     {/* <span style={{ cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}><img style={{ width: '40px', borderRadius: '50%' }} src={Logo} alt /></span> */}
-                    <Logo />
+                    {/* <Logo /> */}
+                    <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src={logo} alt />
                 </div>
                 <div className="col-8 d-flex justify-content-end">
                     <button className="btn btn-light mx-2 align-items-center" onClick={() => navigate('/LanguagesPage')}><i className="bi bi-translate text-primary" /> Language</button>

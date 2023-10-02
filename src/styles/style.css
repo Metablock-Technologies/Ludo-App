@@ -14,6 +14,16 @@
     background-color: #7639ef !important;
 }
 
+
+/* Add this CSS to your stylesheet or a separate CSS file */
+@media (max-width: 768px) {
+  /* Define styles for screens with a maximum width of 768px (e.g., mobile devices) */
+  /* Adjust margins, padding, font sizes, etc. to fit smaller screens */
+  .transaction-item {
+    margin-bottom: 10px;
+  }
+  /* Add more responsive styles as needed */
+}
 #main-bg {
     background-image: url('/public/images/Desktop.png');
     height: 100% !important;
@@ -206,8 +216,17 @@ background-image: url('/public/images/register-bg.png');
 }
 
 .gamecard {
+   
     background: transparent !important;
     object-fit: contain !important;
+}
+
+@media (max-width:768px) {
+    .gamecard {
+    padding: 5px;
+    background: transparent !important;
+    object-fit: contain !important;
+}
 }
 
 .gamecard img {
@@ -597,6 +616,17 @@ background-image: url('/public/images/register-bg.png');
     -ms-overflow-style: none; /* Hide scrollbar on IE and Edge */
   }
   
+
+  /* Style the scrollbar track */
+::-webkit-scrollbar {
+    width: 10px; /* Adjust the width */
+}
+
+/* Style the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background: transparent; /* Background color of the thumb */
+    border-radius: 5px; /* Rounded corners */
+}
   .scroll-container::-webkit-scrollbar {
     width: 0; /* Hide scrollbar on Chrome and Safari */
   }
@@ -644,4 +674,10 @@ background-image: url('/public/images/register-bg.png');
     color: white !important;
     position: absolute;
     text-align: center;
+}
+@media (max-width:768px) {
+    .type-history{
+        display: flex;
+        font-size: 11px;
+    }
 }

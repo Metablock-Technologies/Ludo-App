@@ -13,16 +13,15 @@ function HistoryPage() {
     const [wallettransaction, setWalletTransaction] = useState([]);
     const [cointransaction, setCoinTransaction] = useState([]);
     const [accessUserId, setAccessUserID] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
     const [statusdata, setStatusData] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [imageSrc, setImageSrc] = useState('');
     const [amount, setAmount] = useState("");
     const [challenges, setChallenges] = useState([]);
-
-    const itemsPerPage = 5; // Updated to display 5 items per page initially
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+    const [currentData, setCurrentData] = useState([]); // Store the data for the current page
+    const [totalPages, setTotalPages] = useState(1); // Total number of pages
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4; // Updated to display 5 items per page initially
 
 
     const handlePageChange = (pageNumber) => {
@@ -85,15 +84,19 @@ function HistoryPage() {
         setSelectedType('classic');
         fetchdata('coinTransaction');
         fetchtransaction();
+        setCurrentPage(1); // Reset the current page when switching options
     };
 
     const handleWallet = () => {
         setSelectedType('status');
         fetchamountstatus();
         fetchtransaction();
+        setCurrentPage(1); // Reset the current page when switching options
     };
 
     const selectedTransactionData = selectedType === 'classic' ? cointransaction : wallettransaction;
+
+    // const currentTransactionData = selectedTransactionData.slice(startIndex, endIndex);
 
     const fetchchallenges = async () => {
         try {
@@ -111,11 +114,35 @@ function HistoryPage() {
     const handleChallenges = () => {
         setSelectedType("challenges");
         fetchchallenges();
+        setCurrentPage(1); // Reset the current page when switching options
     }
     useEffect(() => {
         fetchtransaction();
         fetchdata('coinTransaction'); // Fetch data based on the selected type when component mounts
     }, []); // Trigger useEffect when selectedType changes
+
+
+    useEffect(() => {
+        // Update the current data when the selected type or page changes
+        if (selectedType === 'classic') {
+            setCurrentData(cointransaction);
+        } else if (selectedType === 'status') {
+            setCurrentData(statusdata);
+        } else if (selectedType === 'challenges') {
+            setCurrentData(challenges);
+        }
+
+        // Calculate the total number of pages based on the current data and itemsPerPage
+        setTotalPages(Math.ceil(currentData.length / itemsPerPage));
+    }, [selectedType, currentData]);
+
+
+    // Calculate start and end indexes for the current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    // Slice the current data to display only the items for the current page
+    const currentTransactionData = currentData.slice(startIndex, endIndex);
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -141,7 +168,7 @@ function HistoryPage() {
                         <div className="col-12">
                             <HeaderComponent />
                         </div>
-                        <div className="col-12 my-4">
+                        <div className="col-12 my-4 type-history">
                             <button className="history-btn rounded-pill mx-2" id="classic-btn" onClick={handleClassic}>Transactions</button>
                             <button className="history-btn rounded-pill mx-2" id="wallet-btn" onClick={handleWallet}>Payment Status</button>
                             <button className="history-btn rounded-pill mx-2" id="wallet-btn" onClick={handleChallenges}>All Challenges</button>
@@ -150,7 +177,7 @@ function HistoryPage() {
                     <div className="row" id="all">
                         <div className="col-12">
                             {selectedType === "classic" &&
-                                cointransaction?.map(item => {
+                                currentTransactionData?.map(item => {
                                     // Extract date and time from "createdAt"
                                     const createdAtDate = new Date(item?.createdAt);
                                     const date = createdAtDate.toLocaleDateString(); // Extract date
@@ -192,7 +219,7 @@ function HistoryPage() {
                                 })
                             }
                             {selectedType == "status" &&
-                                statusdata?.map(item => {
+                                currentTransactionData?.map(item => {
                                     // Extract date and time from "createdAt"
                                     const createdAtDate = new Date(item?.createdAt);
                                     const date = createdAtDate.toLocaleDateString(); // Extract date
@@ -230,7 +257,7 @@ function HistoryPage() {
                             }
                             {
                                 selectedType == "challenges" &&
-                                challenges?.map(item => {
+                                currentTransactionData?.map(item => {
                                     // Extract date and time from "createdAt"
                                     const createdAtDate = new Date(item?.createdAt);
                                     const date = createdAtDate.toLocaleDateString(); // Extract date
