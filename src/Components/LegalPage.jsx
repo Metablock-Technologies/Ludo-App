@@ -2,13 +2,41 @@ import React, { useEffect, useState } from 'react'
 import HeaderComponent from './HeaderComponent'
 import Logo from './Logo';
 
+// import { CopyToClipboard } from 'react-copy-to-clipboard';
+// import {
+//     Facebook as FacebookIcon,
+//     Twitter as TwitterIcon,
+//     WhatsApp as WhatsAppIcon,
+//     Instagram as InstagramIcon,
+// } from '@mui/icons-material';
+// import { Button } from '@mui/material';
+
+// import { IconButton, Dialog, DialogContent, DialogActions } from '@mui/material';
+// import { FileCopy, Share } from '@mui/icons-material';
+
 function LegalPage() {
     const [activeCard, setActiveCard] = useState(null);
     const [enable, setEnable] = useState(false);
+    // const [linkToCopy, setLinkToCopy] = useState('http://ludokavish.com');
+    // const [showDialog, setShowDialog] = useState(false);
+    // const [openDialog, setOpenDialog] = useState(false);
+
     const handleCardClick = (cardNumber) => {
         setEnable(!enable)
         setActiveCard(cardNumber);
     };
+    // const handleCopyLink = () => {
+    //     navigator.clipboard.writeText(linkToCopy);
+    //     // You can add a message or UI feedback here to indicate that the link has been copied.
+    // };
+    // const handleOpenDialog = () => {
+    //     setOpenDialog(true);
+    // };
+
+    // const handleCloseDialog = () => {
+    //     setOpenDialog(false);
+    // };
+
 
     return (
         <>
@@ -18,6 +46,11 @@ function LegalPage() {
                         <div className="col-12 mb-5">
                             <HeaderComponent />
                         </div>
+                        {/* <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white">
+                            <div className="row" id="card1" onClick={(e) => {
+                                setShowDialog(true)
+                            }} > */}
+
                         <div className="col-12 card my-1 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="row" id="card1" onClick={() => handleCardClick(1)} >
                                 <div className="col d-flex justify-content-between">
@@ -30,7 +63,7 @@ function LegalPage() {
                                     <div className="row">
                                         <div className="col-12">
                                             <p className="text-light lh-lg">
-                                                These <strong className="text-purple">terms and conditions</strong>  of use (“Terms”) along with privacy policy (“Privacy Policy”) forms a legally binding agreement (“Agreement”) between You and us <a href className="text-warning">( ludoKavish.com )</a>
+                                                These <strong className="text-purple">terms and conditions</strong>  of use (“Terms”) along with privacy policy (“Privacy Policy”) forms a legally binding agreement (“Agreement”) between You and us <a href=" https://ludokavish.com" className="text-warning"> </a>
                                                 <br />
                                                 Hence, We insist that You read these Terms and Privacy Policy and let Us know if You have any questions regarding the same. We will try Our best to answer Your queries.
                                                 <br />

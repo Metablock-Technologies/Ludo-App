@@ -192,6 +192,9 @@ function ProfilePage() {
                                         <input type="number" className="col-12 text-left d-flex details" value={responsedetails?.phone} disabled />
                                     </div>
 
+                                    <a className="text-center my-2 row mt-2 mx-auto text-decoration-none" onClick={handleLogout}>
+                                        <button className="col-12 btn rounded btn-danger px-2">Logout</button>
+                                    </a>
                                     <div className="col-12" style={{ display: 'none' }}>
                                         <div className="card container border border-success mt-2 kycbox text-success">
                                             <div className="row align-items-center my-2">
@@ -298,9 +301,6 @@ function ProfilePage() {
                                 </div>
                             </div>
                         </div>
-                        <a className="text-center my-2 row mt-2 mx-auto text-decoration-none" onClick={handleLogout}>
-                            <button className="col-12 btn rounded btn-danger px-2">Logout</button>
-                        </a>
                     </div>
                 </div>
                 <div className="" style={{ position: 'fixed', top: '50%', left: 'calc(100% - 40%)', transform: `translate(-50%,-50%)`, zIndex: 5 }}>

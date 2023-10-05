@@ -70,9 +70,9 @@ function EnterFirstGame() {
             responsePromise.then(response => {
                 console.log('API response data:', response.data);
                 setMessage("sent request successfully");
+                setIsLoading(false);
+                navigate('/PlayPage')
             });
-            setIsLoading(false);
-            navigate('/PlayPage')
         } catch (error) {
             console.error(error);
             setMessage(error?.response?.data?.message);
@@ -119,8 +119,8 @@ function EnterFirstGame() {
 
     const handleBackbtn = () => {
         setMessage('')
-        // navigate(-1)
-        navigate("/SecondPage", { state: { propKey: propvalue } })
+        navigate("/PlayPage")
+        // navigate("/SecondPage", { state: { propKey: propvalue } })
         // console.log("heyy");
         // console.log(navigate);
     }

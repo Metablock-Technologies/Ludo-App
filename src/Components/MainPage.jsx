@@ -8,7 +8,6 @@ function MainPage() {
         <>
             <section id="main-bg">
                 <div style={{ height: '300vh', paddingBottom: '20rem' }} id="index-container" className=" mx-0">
-
                     <div id="index-nav" className="row py-2  align-items-center">
                         <div className="col-7 text-light "><strong><i className="bi bi-arrow-down-circle-fill" />&nbsp;Download App</strong></div>
                         <div className="col-5 d-flex justify-content-end text-light btn " >
@@ -30,7 +29,6 @@ function MainPage() {
                     </div>
                 </div>
             </section >
-
         </>
     )
 }

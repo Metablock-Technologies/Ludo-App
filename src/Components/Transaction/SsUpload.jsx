@@ -88,7 +88,7 @@ const ScreenshotUpload = ({ amount }) => {
                     <label htmlFor="username" className="text-left text-yellow" >UPI ID</label>
                 </div>
                 <div className="col-12 mb-4" disabled>
-                    <input type="text" className="details" value={"63788948750@paytm"} placeholder="63788948750@paytm" disabled />
+                    <input type="text" className="details" value={"6378894875@paytm"} placeholder="6378894875@paytm" disabled />
                 </div>
                 <input type="file" class="form-control" id="inputGroupFile02" accept="image/*" />
             </div>

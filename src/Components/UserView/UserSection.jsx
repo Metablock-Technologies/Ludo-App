@@ -154,6 +154,15 @@ function UserSection() {
                                 <span className="material-symbols-outlined">keyboard_arrow_right</span>
                             </div>
                         </div>
+                        <div onClick={() => navigate('/share')} className="col-12 d-flex justify-content-between text-light p-2 nav-item ">
+                            <div className="d-flex align-items-center">
+                                <span className="material-symbols-outlined me-2">gavel</span>
+                                <h4 className="mb-0">Share</h4>
+                            </div>
+                            <div className="d-flex align-items-center">
+                                <span className="material-symbols-outlined">keyboard_arrow_right</span>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

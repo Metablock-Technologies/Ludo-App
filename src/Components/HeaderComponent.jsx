@@ -39,7 +39,7 @@ function HeaderComponent() {
                 </div>
                 <div className="col-3" style={{ width: '90px', borderRadius: '50%', cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}>
                     {/* <span style={{ cursor: 'pointer' }} onClick={() => navigate('/PlayPage')}><img style={{ width: '40px', borderRadius: '50%' }} src={Logo} alt /></span> */}
-                    {/* <Logo /> */}
+
                     <img style={{ marginLeft: '10px', width: "80% ", borderRadius: '50%' }} src={logo} alt />
                 </div>
                 <div className="col-8 d-flex justify-content-end">

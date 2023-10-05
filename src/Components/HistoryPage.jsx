@@ -14,15 +14,20 @@ function HistoryPage() {
     const [cointransaction, setCoinTransaction] = useState([]);
     const [accessUserId, setAccessUserID] = useState(0);
     const [statusdata, setStatusData] = useState([]);
+    const [withdrawdata, setWithdrawdata] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [imageSrc, setImageSrc] = useState('');
     const [amount, setAmount] = useState("");
     const [challenges, setChallenges] = useState([]);
+    // const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]); // Store the data for the current page
     const [totalPages, setTotalPages] = useState(1); // Total number of pages
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4; // Updated to display 5 items per page initially
+    const itemsPerPage = 4;
 
+    // Calculate start and end indexes for the current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -74,7 +79,11 @@ function HistoryPage() {
             const responsedetails = await axios.get(baseURL + '/user/wallet/moneyrequest', {
                 headers: headers,
             });
-            setStatusData(responsedetails?.data?.data)
+            console.log(responsedetails?.data?.data?.addRequest);
+            setStatusData(responsedetails?.data?.data?.addRequest);
+            setWithdrawdata(responsedetails?.data?.data?.withdrawRequest);
+            console.log("heyyy", statusdata, withdrawdata);
+
         } catch (error) {
             console.error(error);
         }
@@ -136,10 +145,6 @@ function HistoryPage() {
         setTotalPages(Math.ceil(currentData.length / itemsPerPage));
     }, [selectedType, currentData]);
 
-
-    // Calculate start and end indexes for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
 
     // Slice the current data to display only the items for the current page
     const currentTransactionData = currentData.slice(startIndex, endIndex);
@@ -219,7 +224,7 @@ function HistoryPage() {
                                 })
                             }
                             {selectedType == "status" &&
-                                currentTransactionData?.map(item => {
+                                statusdata?.map(item => {
                                     // Extract date and time from "createdAt"
                                     const createdAtDate = new Date(item?.createdAt);
                                     const date = createdAtDate.toLocaleDateString(); // Extract date
@@ -248,81 +253,112 @@ function HistoryPage() {
                                                     <h5 className={`mb-0 ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
                                                         {item?.sender === accessUserId ? '-' : '+'}{item?.amount}
                                                     </h5>
-                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Amount:- </strong>{amount}</h5>
+                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Type:- </strong>addcoins</h5>
                                                 </div>
                                             </div>
                                         </div>
                                     );
-                                })
-                            }
-                            {
-                                selectedType == "challenges" &&
-                                currentTransactionData?.map(item => {
-                                    // Extract date and time from "createdAt"
-                                    const createdAtDate = new Date(item?.createdAt);
-                                    const date = createdAtDate.toLocaleDateString(); // Extract date
-                                    const time = createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Extract time
+                                })}
+                            {withdrawdata && withdrawdata?.map(item => {
+                                // Extract date and time from "createdAt"
+                                const createdAtDate = new Date(item?.createdAt);
+                                const date = createdAtDate.toLocaleDateString(); // Extract date
+                                const time = createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Extract time
 
-                                    return (
-                                        <div key={item?.id} className="transaction-item" style={{ fontSize: "15px" }}>
-                                            <div className="row bg-light p-2 mb-3 rounded">
-                                                <div className="col-2 border-end d-flex flex-column align-items-center justify-content-center">
-                                                    <img src="./images/img.jpg" className="rounded-circle" style={{ width: '30px', height: '30px' }} alt="" />
-                                                    <div className="d-flex flex-column align-items-center">
-                                                        <p className="mb-0 time">{time}</p>
-                                                        <p className="mb-0 date">{date}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-8 d-flex flex-column justify-content-center">
-                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Status:- </strong>{item?.status}</h5>
-                                                    <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Roomcode:- </strong>{item?.roomcode}</h5>
-                                                    {/* <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Category:- </strong>{item?.category}</h5> */}
-
-                                                </div>
-                                                <div className="col-2 border-start d-flex flex-column align-items-center justify-content-center">
-                                                    <h5 className={`mb-0 ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
-                                                        {item?.price}
-                                                    </h5>
-                                                    {/* <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Amount:- </strong>{amount}</h5> */}
+                                return (
+                                    <div key={item?.id} className="transaction-item" style={{ fontSize: "15px" }}>
+                                        <div className="row bg-light p-2 mb-3 rounded">
+                                            <div className="col-2 border-end d-flex flex-column align-items-center justify-content-center">
+                                                <img src="./images/img.jpg" className="rounded-circle" style={{ width: '30px', height: '30px' }} alt="" />
+                                                <div className="d-flex flex-column align-items-center">
+                                                    <p className="mb-0 time">{time}</p>
+                                                    <p className="mb-0 date">{date}</p>
                                                 </div>
                                             </div>
+                                            <div className="col-8 d-flex flex-column justify-content-center">
+                                                <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Status:- </strong>{item?.status}</h5>
+                                                <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Message:- </strong>{item?.message}</h5>
+                                            </div>
+                                            <div className="col-2 border-start d-flex flex-column align-items-center ">
+                                                <h5 className={`mb-0 ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
+                                                    -{item?.amount}
+                                                </h5>
+                                                <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Type:- </strong>withdraw</h5>
+                                            </div>
                                         </div>
-                                    );
-                                })
-                            }
+                                    </div>
+                                );
+                            })}
                         </div>
-                        <div className="col-12 d-flex justify-content-center my-3">
-                            <button
-                                className="btn btn-primary mx-2"
-                                disabled={currentPage === 1}
-                                onClick={() => handlePageChange(currentPage - 1)}
-                            >
-                                <i className="bi bi-caret-left-square-fill" />
-                            </button>
-                            <button
-                                className="btn btn-primary mx-2"
-                                disabled={currentPage === 1}
-                                onClick={() => handlePageChange(currentPage - 1)}
-                            >
-                                <i className="bi bi-caret-left" /> Previous
-                            </button>
-                            <button
-                                className="btn btn-primary mx-2"
-                                // disabled={endIndex >= data.length}
-                                onClick={() => handlePageChange(currentPage + 1)}
-                            >
-                                Next <i className="bi bi-caret-right" />
-                            </button>
-                            <button
-                                className="btn btn-primary mx-2"
-                                // disabled={endIndex >= data.length}
-                                onClick={() => handlePageChange(currentPage + 1)}
-                            >
-                                <i className="bi bi-caret-right-square-fill" />
-                            </button>
-                        </div>
+                        {/* } */}
+                        {
+                            selectedType == "challenges" &&
+                            currentTransactionData?.map(item => {
+                                // Extract date and time from "createdAt"
+                                const createdAtDate = new Date(item?.createdAt);
+                                const date = createdAtDate.toLocaleDateString(); // Extract date
+                                const time = createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Extract time
+
+                                return (
+                                    <div key={item?.id} className="transaction-item" style={{ fontSize: "15px" }}>
+                                        <div className="row bg-light p-2 mb-3 rounded">
+                                            <div className="col-2 border-end d-flex flex-column align-items-center justify-content-center">
+                                                <img src="./images/img.jpg" className="rounded-circle" style={{ width: '30px', height: '30px' }} alt="" />
+                                                <div className="d-flex flex-column align-items-center">
+                                                    <p className="mb-0 time">{time}</p>
+                                                    <p className="mb-0 date">{date}</p>
+                                                </div>
+                                            </div>
+                                            <div className="col-8 d-flex flex-column justify-content-center">
+                                                <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Status:- </strong>{item?.status}</h5>
+                                                <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Roomcode:- </strong>{item?.roomcode}</h5>
+                                                {/* <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Category:- </strong>{item?.category}</h5> */}
+
+                                            </div>
+                                            <div className="col-2 border-start d-flex flex-column align-items-center justify-content-center">
+                                                <h5 className={`mb-0 ${item?.amount < 0 ? 'text-danger' : 'text-success'}`}>
+                                                    {item?.price}
+                                                </h5>
+                                                {/* <h5 className="mb-0" style={{ margin: '0', fontSize: "15px" }}><strong>Amount:- </strong>{amount}</h5> */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                    <div className="col-12 d-flex justify-content-center my-3">
+                        <button
+                            className="btn btn-primary mx-2"
+                            disabled={currentPage === 1}
+                            onClick={() => handlePageChange(currentPage - 1)}
+                        >
+                            <i className="bi bi-caret-left-square-fill" />
+                        </button>
+                        <button
+                            className="btn btn-primary mx-2"
+                            disabled={currentPage === 1}
+                            onClick={() => handlePageChange(currentPage - 1)}
+                        >
+                            <i className="bi bi-caret-left" /> Previous
+                        </button>
+                        <button
+                            className="btn btn-primary mx-2"
+                            // disabled={endIndex >= data.length}
+                            onClick={() => handlePageChange(currentPage + 1)}
+                        >
+                            Next <i className="bi bi-caret-right" />
+                        </button>
+                        <button
+                            className="btn btn-primary mx-2"
+                            // disabled={endIndex >= data.length}
+                            onClick={() => handlePageChange(currentPage + 1)}
+                        >
+                            <i className="bi bi-caret-right-square-fill" />
+                        </button>
                     </div>
                 </div>
+                {/* </div> */}
                 <div className="rightContainer" style={{ position: 'fixed', top: 0, bottom: 0, left: 900, zIndex: 5 }}>
                     <div className="rcBanner flex-center">
                         <Logo />
@@ -334,7 +370,7 @@ function HistoryPage() {
                             &nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     );
 }

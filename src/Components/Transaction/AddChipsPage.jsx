@@ -52,9 +52,7 @@ function AddChipsPage() {
                         <div className="col-12 card mt-3 walletcard pt-2 px-0 mx-auto text-white">
                             <div className="text-center">Buy Chips</div>
                             <div className="card-body walletbody mt-2">
-
                                 <QRCodeDisplay handleOpenQrCode={handleOpenQrCode} />
-
                             </div>
                         </div>
                         <div className="col-12 my-3">
@@ -77,7 +75,6 @@ function AddChipsPage() {
                         <div className="rcBanner-text">Play Ludo &amp; <span className="rcBanner-text-bold">Win Real Cash!</span></div>
                         <div className="rcBanner-footer">For best experience, open&nbsp;<a href="/">ludokavish.com</a>&nbsp;on&nbsp;&nbsp;chrome </div> */}
                     </div>
-
                 </div>
             </section>
 

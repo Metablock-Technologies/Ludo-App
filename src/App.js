@@ -24,6 +24,8 @@ import RegisterLegalPage from './Components/RegisterLegalPAge';
 import ForgetEmail from './Components/ForgetPassword/ForgetEmail';
 import GetForgetOtp from './Components/ForgetPassword/GetForgetOtp';
 import ChangePassword from './Components/ForgetPassword/ChangePassword';
+import Share from './Components/Share';
+import SharePage from './Components/Share';
 
 function PrivateRoute({ element }) {
     // const { isLoggedIn } = useAuth();
@@ -86,6 +88,7 @@ function App() {
                         <Route exact path='/UserPage' element={<PrivateRoute element={<UserPage />} />} ></Route>
                         <Route exact path='/PlayPage' element={<PrivateRoute element={<PalyPage />} />} ></Route>
                         <Route exact path='/FirstGame' element={<PrivateRoute element={<FirstGame />} />} ></Route>
+                        <Route exact path='/share' element={<PrivateRoute element={<SharePage />} />} />
                         <Route exact path='/EnterFirstGame' element={<PrivateRoute element={<EnterFirstGame />} />} ></Route>
                         <Route exact path='/SecondPage' element={<PrivateRoute element={<SecondPage />} />} ></Route>
                         <Route exact path='/WalletPage' element={<PrivateRoute element={<WalletPage />} />} ></Route>

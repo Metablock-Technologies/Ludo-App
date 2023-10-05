@@ -23,7 +23,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 export default function ScannerDialog({ open, setOpen }) {
 
-
     return (
         <div>
             <BootstrapDialog
@@ -34,7 +33,7 @@ export default function ScannerDialog({ open, setOpen }) {
             >
 
 
-                <div style={{ placeItems: 'center ', padding: "10px" }}>Scan Qr code, take screenshot and upload the screenshot   <img style={{ width: '300px', margin: "auto", marginBottom: "10px" }} src="./images/metaBlock.png" alt="QR Code" /></div>
+                <div style={{ placeItems: 'center ', padding: "10px" }}>Scan Qr code, take screenshot and upload the screenshot   <img style={{ width: '300px', margin: "auto", marginBottom: "10px" }} src="./images/qrcodee.jpeg" alt="QR Code" /></div>
 
             </BootstrapDialog >
         </div >
